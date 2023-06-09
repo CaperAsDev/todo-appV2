@@ -6,7 +6,7 @@ type TodoListProps = {
 
 export default function TodoList({ children } : TodoListProps) {
   return (
-    <ul>
+    <ul className="tasks-list">
       {children}
     </ul>
   );

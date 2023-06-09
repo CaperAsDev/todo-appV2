@@ -1,14 +1,23 @@
+enum TaskStatus {
+  Completed = 'Completed',
+  InProgress = 'InProgress',
+  ToDo = 'ToDo',
+}
+
 type TodoItemProps = {
-  text: string,
-  completed: boolean,
+  title: string,
+  status: TaskStatus,
 };
 
-export default function TodoItem({ text, completed }: TodoItemProps) {
+export default function TodoItem({ title, status }: TodoItemProps) {
+  let icon :string;
+  if (status === TaskStatus.Completed)icon = '✅';
+  else if (status === TaskStatus.ToDo)icon = '☑️';
+  else icon = '⏳';
   return (
-    <div>
-      <span>{completed ? '✅' : '☑️'}</span>
-      <p>{text}</p>
-      <span>❌</span>
+    <div className="todo-item">
+      <p>{title}</p>
+      <span>{icon}</span>
     </div>
   );
 }

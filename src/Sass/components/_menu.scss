@@ -1,0 +1,32 @@
+@use "../abstracts" as *;
+
+.menu-container{
+  @include centerFlex;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: fit-content;
+  height: fit-content;
+  gap: 2px;
+  .items-container{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    .menu__item {
+      width: 100px;
+      padding: 8px;
+      background-color: $Deep-Teal-Sea-3;
+      font: {
+        weight: 500;
+        size: 1.5rem;
+      }
+      text-align: end;
+    }
+  }
+  .menu__side-bar{
+    width: 20px;
+    align-self: stretch;
+    background-color: var(--accent-color-1);
+  }
+
+}

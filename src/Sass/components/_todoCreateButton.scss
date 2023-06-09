@@ -1,0 +1,9 @@
+.create-btn{
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover{
+    transform: scale(1.1);
+  }
+}

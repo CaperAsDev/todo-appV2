@@ -1,0 +1,8 @@
+/* Here will be the import of fonts and its application */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;700;900&display=swap');
+
+$main-font:'Nunito', sans-serif;
+
+*{
+  font-family: $main-font;
+}

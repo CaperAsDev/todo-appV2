@@ -1,0 +1,19 @@
+@use "../abstracts";
+
+html{
+  background-color: abstracts.$Deep-Teal-Sea-1;
+  color: abstracts.$Deep-Teal-Sea-5;
+}
+body{
+  width: 100%;
+  height: 100%; 
+}
+button{
+  background-color: var(--accent-color-1);
+  outline: transparent;
+  border: none;
+  color: abstracts.$Deep-Teal-Sea-1;
+  // padding: 10px;
+  // font-weight: 600;
+  // border-radius: 5px;
+}

@@ -1,0 +1,21 @@
+@use "../abstracts" as *;
+
+.search-box {
+  background-color: $Deep-Teal-Sea-4;
+  padding: 10px;
+  border-radius: 20px;
+  &:hover {
+    outline: 2px solid $Deep-Teal-Sea-1;
+    box-shadow: 1px 1px 3px 1px var(--accent-color-3);
+  }
+  input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    margin-left: 5px;
+    color: var(--dark-color);
+    &::placeholder {
+      color: $Deep-Teal-Sea-3;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+@use "../abstracts" as *;
+header{
+  @include centerFlex;
+  height: 60px;
+  justify-content: space-between;
+  background-color: $Deep-Teal-Sea-2;
+  H1{
+    margin-left: 10px;
+    span{
+      color: var(--accent-color-1);
+      // color: $Deep-Teal-Sea-4;
+    }
+  }
+  .profile{
+    margin-right: 10px;
+    p{
+      font-size: 1.5rem;
+      font-weight: 500;
+    }
+  }
+}
