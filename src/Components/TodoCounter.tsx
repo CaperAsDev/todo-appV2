@@ -1,11 +1,14 @@
+import { Task, TaskStatus } from '../models';
+
 type TodoFounterProps = {
-  completed: number,
-  total: number
+  tasks: Task[];
 };
-export default function TodoCounter({ completed, total }: TodoFounterProps) {
+export default function TodoCounter({ tasks }: TodoFounterProps) {
+  const countTodosCompleted = tasks.filter((todo) => todo.status === TaskStatus.Completed).length;
+
   return (
     <h2>
-      You have completed {completed} tasks out of {total}
+      You have completed {countTodosCompleted} tasks out of {tasks.length}
     </h2>
   );
 }

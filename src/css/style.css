@@ -11,6 +11,11 @@
   --scheme-300: #8E74B5;
   --scheme-400: #5C4B75;
   --scheme-500: #2C2438;
+  --status-Completed: #9AC738;
+  --status-InProgress: #FFD770;
+  --status-ToDo: #55CEF2;
+  --status-Paused: #A373DE;
+  --status-Canceled: #FF4C38;
 }
 
 /* Color Theme Swatches in Hex */
@@ -343,6 +348,7 @@ button {
   outline: transparent;
   border: none;
   color: #012E40;
+  padding: 0;
 }
 
 .create-btn {
@@ -364,14 +370,46 @@ button {
   gap: 10px;
   background-color: var(--scheme-500);
   color: var(--scheme-100);
-  border-radius: 10px;
-  padding: 0 10px;
+  border-radius: 10px 0 0 10px;
+  padding-left: 10px;
+  cursor: pointer;
+}
+.todo-item:hover {
+  transform: scale(1.05);
+}
+.todo-item .item__status {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  align-self: stretch;
+}
+.todo-item .item__status--Completed {
+  background-color: var(--status-Completed);
+}
+.todo-item .item__status--InProgress {
+  background-color: var(--status-InProgress);
+}
+.todo-item .item__status--ToDo {
+  background-color: var(--status-ToDo);
+}
+.todo-item .item__status--Canceled {
+  background-color: var(--status-Canceled);
+}
+.todo-item .item__status--Paused {
+  background-color: var(--status-Paused);
+}
+.todo-item .item__status * {
+  color: var(--scheme-500);
+}
+
+.item--selected {
+  box-shadow: 0px 0px 2px 1px var(--scheme-100);
 }
 
 .tasks-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   margin: 0;
   padding: 0;
 }
@@ -399,21 +437,42 @@ button {
   color: #026773;
 }
 
-.tasks__detail .current-task {
+.current-task {
   border-radius: 0 20px;
   padding: 10px;
   background-color: var(--scheme-500);
   color: var(--light-color);
 }
-.tasks__detail .current-task h3 {
+.current-task h3 {
   color: var(--accent-color-1);
 }
-.tasks__detail .current-task .task-status {
+.current-task .task-status {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   font-weight: 600;
 }
-.tasks__detail .current-task .description {
+.current-task .task-status .status-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.current-task .task-status .status-control .status__actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.current-task .task-status .status-control .status__actions .action-buttons {
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+.current-task .task-status .status-control .status__actions .action-buttons:hover {
+  transform: scale(1.05);
+}
+.current-task .description {
   color: #F2E3D5;
   text-align: justify;
 }
@@ -437,18 +496,37 @@ button {
   flex-direction: column;
   gap: 2px;
 }
+.menu-container .items-container .item-container:hover .menu__item {
+  transform: translateX(22px);
+}
 .menu-container .items-container .menu__item {
   width: 100px;
   padding: 8px;
+  margin: 0;
   background-color: #026773;
+  text-align: end;
+  cursor: pointer;
   font-weight: 500;
   font-size: 1.5rem;
-  text-align: end;
 }
 .menu-container .menu__side-bar {
   width: 20px;
   align-self: stretch;
   background-color: var(--accent-color-1);
+}
+
+.clock-container {
+  position: absolute;
+  padding: 8px;
+  border-radius: 10px 0 0 10px;
+  top: 10px;
+  right: 10px;
+  background-color: var(--accent-color-1);
+}
+.clock-container .clock {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 footer {

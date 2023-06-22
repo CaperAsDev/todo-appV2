@@ -1,86 +1,39 @@
-import TodoList from './Components/TodoList';
-import TaskDetails from './Components/TaskDetails';
-import TodoItem from './Components/TodoItem';
-import TodoCounter from './Components/TodoCounter';
-import TodoSearch from './Components/TodoSearch';
-import TodoCreateButton from './Components/TodoCreateButton';
-import Header from './Components/header';
-import Footer from './Components/Footer';
-import Menu from './Components/Menu';
-import MenuItems, { DataType } from './Components/MenuItems';
+import React from 'react';
 
-enum TaskStatus {
-  Completed = 'Completed',
-  InProgress = 'InProgress',
-  ToDo = 'ToDo',
-}
-enum TaskImportance {
-  Important = 'Important',
-  Urgent = 'Urgent',
-  Necessary = 'Necessary',
-  IWouldLike = 'I Would Like',
-  Optional = 'Optional',
-}
+import { TaskMemoryService } from './service';
+import { Task } from './models';
+import AppUI from './AppUi';
 
-interface ItemTodoList {
-  title: string;
-  status: TaskStatus;
-  description: string;
-  importance: TaskImportance;
-}
-
-const todoItems: ItemTodoList[] = [
-  {
-    title: 'Animes del dia', status: TaskStatus.Completed, importance: TaskImportance.IWouldLike, description: 'Ver los animes del dia: Konosuba, Tate no yuusha',
-  },
-  {
-    title: 'Ver minimo una clase en Platzi', status: TaskStatus.InProgress, importance: TaskImportance.Necessary, description: 'Ver minimo una clase en Platzi',
-  },
-  {
-    title: 'Hacer un dibujo', status: TaskStatus.ToDo, importance: TaskImportance.Optional, description: 'Hacer un dibujo',
-  },
-  {
-    title: 'Dejar ok el juego de skull girls', status: TaskStatus.InProgress, importance: TaskImportance.Optional, description: 'Dejar ok el juego de skull girls',
-  },
-];
-const first = todoItems[0];
 function App() {
+  const initialState = TaskMemoryService.getAllTasks('MLM_Tas');
+
+  const [tasks, setTasks] = React.useState<Array<Task>>(initialState);
+  const taskService = new TaskMemoryService(tasks, setTasks, 'MLM_Tas');
+
+  const [searchValue, setSearchValue] = React.useState(' ');
+  const [idSelected, setIdSelected] = React.useState<Task['id']>(tasks[0]?.id);
+  const indexTask = tasks.findIndex((task) => task.id === idSelected);
+
+  const searchedTodo = tasks
+    .filter((todo) => {
+      const descriptionTxt = todo.description.toLowerCase();
+      const titleTxt = todo.title.toLowerCase();
+      const searchTxt = searchValue.toLowerCase();
+      return (
+        descriptionTxt.includes(searchTxt)
+      || titleTxt.includes(searchTxt));
+    });
   return (
-    <>
-      <Header userName="caper">
-        <TodoSearch />
-      </Header>
-      <main>
-        <Menu>
-          <MenuItems itemType={DataType.Category} />
-          <MenuItems itemType={DataType.Goal} />
-          <MenuItems itemType={DataType.Objetive} />
-          <MenuItems itemType={DataType.Task} />
-        </Menu>
-        <div className="interface">
-          <TodoCounter completed={2} total={5} />
-          <div className="tasks">
-            <TodoList>
-              {todoItems.map((todo) => (
-                <TodoItem
-                  key={todo.title}
-                  title={todo.title}
-                  status={todo.status}
-                />
-              ))}
-            </TodoList>
-            <TaskDetails
-              title={first.title}
-              description={first.description}
-              status={first.status}
-              importance={first.importance}
-            />
-          </div>
-          <TodoCreateButton />
-        </div>
-      </main>
-      <Footer />
-    </>
+    <AppUI
+      setSearchValue={setSearchValue}
+      searchValue={searchValue}
+      tasks={tasks}
+      searchedTodo={searchedTodo}
+      idSelected={idSelected}
+      setIdSelected={setIdSelected}
+      indexTask={indexTask}
+      taskService={taskService}
+    />
   );
 }
 

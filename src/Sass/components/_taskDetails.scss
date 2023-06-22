@@ -1,23 +1,35 @@
-@use '../abstracts' as *;
+@use "../abstracts" as *;
 
-.tasks__detail{
-  .current-task{
-    border-radius: 0 20px;
-    padding: 10px;
-    background-color: var(--scheme-500);
-    color: var(--light-color);
-    h3{
-      color: var(--accent-color-1);
-    }
-    .task-status{
-      display: flex;
-      justify-content: space-evenly;
-      font-weight: 600;
-    }
-    .description{
-      color: $Deep-Teal-Sea-5;
-      text-align: justify;
+.current-task {
+  border-radius: 0 20px;
+  padding: 10px;
+  background-color: var(--scheme-500);
+  color: var(--light-color);
+  h3 {
+    color: var(--accent-color-1);
+  }
+  .task-status {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 600;
+    .status-control{
+      @include centerFlex(column);
+      .status__actions{
+        @include centerFlex(column);
+        gap: 5px;
+        .action-buttons{
+          border-radius: 5px;
+          padding: 5px;
+          cursor: pointer;
+          &:hover{
+            transform: scale(1.05);
+          }
+        }
+      }
     }
   }
-
+  .description {
+    color: $Deep-Teal-Sea-5;
+    text-align: justify;
+  }
 }

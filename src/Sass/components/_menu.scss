@@ -12,15 +12,20 @@
     display: flex;
     flex-direction: column;
     gap: 2px;
+    .item-container:hover .menu__item{
+      transform: translateX(22px);
+    }
     .menu__item {
       width: 100px;
       padding: 8px;
+      margin: 0;
       background-color: $Deep-Teal-Sea-3;
+      text-align: end;
+      cursor: pointer;
       font: {
         weight: 500;
         size: 1.5rem;
       }
-      text-align: end;
     }
   }
   .menu__side-bar{

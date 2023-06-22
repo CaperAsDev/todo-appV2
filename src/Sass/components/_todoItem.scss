@@ -1,11 +1,42 @@
-@use '../abstracts' as *;
+@use "../abstracts" as *;
 
-.todo-item{
+.todo-item {
   @include centerFlex;
   justify-content: space-between;
   gap: 10px;
   background-color: var(--scheme-500);
   color: var(--scheme-100);
-  border-radius: 10px;
-  padding: 0 10px;
+  border-radius: 10px 0 0 10px;
+  padding-left: 10px;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05);
+  }
+  .item__status {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    align-self: stretch;
+    &--Completed{
+      background-color: var(--status-Completed);
+    }
+    &--InProgress{
+      background-color: var(--status-InProgress);
+    }
+    &--ToDo{
+      background-color: var(--status-ToDo);
+    }
+    &--Canceled{
+      background-color: var(--status-Canceled);
+    }
+    &--Paused{
+      background-color: var(--status-Paused);
+    }
+    & *{
+      color: var(--scheme-500);
+    }
+  }
+}
+.item--selected{
+  box-shadow: 0px 0px 2px 1px var(--scheme-100);
 }
