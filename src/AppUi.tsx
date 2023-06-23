@@ -1,3 +1,4 @@
+import React from 'react';
 import TodoList from './Components/TodoList';
 import TaskDetails from './Components/TaskDetails';
 import TodoItem from './Components/TodoItem';
@@ -9,29 +10,22 @@ import Footer from './Components/Footer';
 import Menu from './Components/Menu';
 import MenuItems, { DataType } from './Components/MenuItems';
 import Reloj from './Components/Reloj';
-import { Task } from './models';
-import { TaskMemoryService } from './service';
+import Message from './Components/Message';
+import { TaskContext } from './Components/TaskContext';
 
-type AppUIProps = {
-  setSearchValue:React.Dispatch<React.SetStateAction<string>>
-  searchValue:string
-  tasks:Task[]
-  searchedTodo:Task[]
-  idSelected: string
-  setIdSelected:React.Dispatch<React.SetStateAction<string>>
-  indexTask: number
-  taskService: TaskMemoryService
-};
-export default function AppUI({
-  setSearchValue,
-  searchValue,
-  tasks,
-  searchedTodo,
-  idSelected,
-  setIdSelected,
-  indexTask,
-  taskService,
-}:AppUIProps) {
+export default function AppUI() {
+  const {
+    error,
+    loading,
+    setSearchValue,
+    searchValue,
+    tasks,
+    searchedTodo,
+    idSelected,
+    setIdSelected,
+    indexTask,
+    taskService,
+  } = React.useContext(TaskContext);
   return (
     <>
       <Header userName="caper">
@@ -47,6 +41,8 @@ export default function AppUI({
         <div className="interface">
           <TodoCounter tasks={tasks} />
           <div className="tasks">
+            {loading && <Message text="Cargando..." />}
+            {error && <Message text="Error..." />}
             <TodoList>
               {searchedTodo.map((todo) => (
                 <TodoItem
@@ -65,7 +61,6 @@ export default function AppUI({
               service={taskService}
             />
             )}
-
           </div>
           <TodoCreateButton addNew={taskService} />
         </div>

@@ -47,6 +47,8 @@ export class TaskMemoryService implements TaskService {
   }
 
   static getAllTasks(itemName: string): Task[] {
+    console.log('Asking Data');
+
     const jsonData = localStorage.getItem(itemName);
     let data: Task[];
     if (!jsonData) {
