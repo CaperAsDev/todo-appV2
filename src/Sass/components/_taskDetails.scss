@@ -17,14 +17,6 @@
       .status__actions{
         @include centerFlex(column);
         gap: 5px;
-        .action-buttons{
-          border-radius: 5px;
-          padding: 5px;
-          cursor: pointer;
-          &:hover{
-            transform: scale(1.05);
-          }
-        }
       }
     }
   }

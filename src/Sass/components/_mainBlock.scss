@@ -1,0 +1,11 @@
+.interface{
+  background-color: $Deep-Teal-Sea-3;
+  padding: 10px;
+  border-radius: 10px;
+  .tasks{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+}

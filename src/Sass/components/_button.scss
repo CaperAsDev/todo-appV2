@@ -1,0 +1,8 @@
+.button{
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+  &:hover{
+    transform: scale(1.05);
+  }
+}

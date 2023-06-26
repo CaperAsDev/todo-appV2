@@ -1,11 +1,5 @@
-import { orderTodos, todoItems } from './Components/utils';
+import { orderTodos, todoItems } from './utils/utils';
 import { CreateTaskDTO, Task, UpdateTask } from './models';
-
-export interface TaskService {
-  updateTask(id: Task['id'], changes: UpdateTask): Task | undefined;
-  create(dto: CreateTaskDTO): Task;
-  findById(id: Task['id']): Task | undefined;
-}
 
 function generarId(longitud: number): string {
   const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -16,22 +10,33 @@ function generarId(longitud: number): string {
   }
   return idGenerado;
 }
+export type TaskMemoryTypes = {
+  create: (data: CreateTaskDTO) => {
+    data: Task;
+    newList: Task[];
+  }
+  getAllTasks: () => Task[]
+  findById: (id: string) => Task | undefined
+  updateTask(id: string, changes: UpdateTask): {
+    taskUpdated: Task | undefined;
+    updatedTasks: Task[];
+  }
+};
 
-export class TaskMemoryService implements TaskService {
-  public initialTasks: Task[] = [];
-
-  public setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
+export class TaskMemoryService implements TaskMemoryTypes {
+  private tasks: Task[];
 
   constructor(
-    initialTasks: Task[],
-    setTasks: React.Dispatch<React.SetStateAction<Task[]>>,
-    public itemName: string,
+    private itemName: string,
   ) {
-    this.initialTasks = initialTasks;
-    this.setTasks = setTasks;
+    this.tasks = this.getAllTasks();
+    console.log('service defined');
   }
 
-  create(data: CreateTaskDTO): Task {
+  create(data: CreateTaskDTO):{
+    data: Task;
+    newList: Task[];
+  } {
     const newData = {
       ...data,
       id: generarId(8),
@@ -40,39 +45,44 @@ export class TaskMemoryService implements TaskService {
   }
 
   add(data: Task) {
-    const newList = [...this.initialTasks, data];
+    const newList = [...this.tasks, data];
     localStorage.setItem(this.itemName, JSON.stringify(orderTodos(newList)));
-    this.setTasks((prevdata) => [data, ...prevdata]);
-    return data;
+    this.tasks = newList;
+    return { data, newList };
   }
 
-  static getAllTasks(itemName: string): Task[] {
-    console.log('Asking Data');
-
-    const jsonData = localStorage.getItem(itemName);
+  getAllTasks(): Task[] {
+    const jsonData = localStorage.getItem(this.itemName);
     let data: Task[];
     if (!jsonData) {
-      localStorage.setItem(itemName, JSON.stringify(todoItems));
+      localStorage.setItem(this.itemName, JSON.stringify(todoItems));
       data = [];
     } else {
       data = JSON.parse(jsonData);
     }
-    return data;
+    console.log('Asking Data');
+    this.tasks = data;
+    return this.tasks;
   }
 
   findById(id: string): Task | undefined {
-    return this.initialTasks.find((task) => task.id === id);
+    return this.tasks.find((task) => task.id === id);
   }
 
-  updateTask(id: string, changes: UpdateTask): Task | undefined {
-    const updatedTasks = this.initialTasks.map((task) => {
+  updateTask(id: string, changes: UpdateTask): {
+    taskUpdated: Task | undefined;
+    updatedTasks: Task[];
+  } {
+    let taskUpdated;
+    const updatedTasks = this.tasks.map((task) => {
       if (task.id === id) {
-        return { ...task, ...changes };
+        taskUpdated = { ...task, ...changes };
+        return taskUpdated;
       }
       return task;
     });
     localStorage.setItem(this.itemName, JSON.stringify(orderTodos(updatedTasks)));
-    this.setTasks(orderTodos(updatedTasks));
-    return updatedTasks.find((task) => task.id === id);
+    this.tasks = updatedTasks;
+    return { taskUpdated, updatedTasks };
   }
 }

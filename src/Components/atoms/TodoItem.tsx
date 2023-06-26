@@ -1,7 +1,7 @@
 import {
   BsFillCheckCircleFill, BsFillDashCircleFill, BsAlarmFill, BsCalendarWeek, BsCupHotFill,
 } from 'react-icons/bs';
-import { TaskStatus } from '../models';
+import { TaskStatus } from '../../models';
 
 type TodoItemProps = {
   title: string,
