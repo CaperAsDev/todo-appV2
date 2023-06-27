@@ -351,17 +351,42 @@ button {
   padding: 0;
 }
 
-.create-btn {
-  padding: 10px;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.create-btn:hover {
-  transform: scale(1.1);
+p {
+  margin: 0;
+  padding: 0;
 }
 
-.todo-item {
+.counter {
+  text-align: center;
+}
+
+.create-btn {
+  background-color: transparent;
+  width: 100%;
+  margin-top: 5px;
+}
+.create-btn .button-text {
+  padding: 10px;
+  border-radius: 0px 0px 10px 10px;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: var(--status-Completed);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.create-btn:hover .button-text {
+  transform: translateY(-5px);
+  color: var(--accent-color-1);
+}
+
+.item-container {
+  background-color: transparent;
+  cursor: pointer;
+}
+.item-container:hover .todo-item {
+  transform: scale(1.05);
+  transform: translateX(20px);
+}
+.item-container .todo-item {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -372,38 +397,39 @@ button {
   color: var(--scheme-100);
   border-radius: 10px 0 0 10px;
   padding-left: 10px;
-  cursor: pointer;
+  min-width: 120px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-.todo-item:hover {
-  transform: scale(1.05);
+.item-container .todo-item span {
+  padding: 15px 0;
 }
-.todo-item .item__status {
+.item-container .todo-item .item__status {
   display: flex;
   align-items: center;
   padding: 2px;
   align-self: stretch;
+  width: 16px;
 }
-.todo-item .item__status--Completed {
+.item-container .todo-item .item__status--Completed {
   background-color: var(--status-Completed);
 }
-.todo-item .item__status--InProgress {
+.item-container .todo-item .item__status--InProgress {
   background-color: var(--status-InProgress);
 }
-.todo-item .item__status--ToDo {
+.item-container .todo-item .item__status--ToDo {
   background-color: var(--status-ToDo);
 }
-.todo-item .item__status--Canceled {
+.item-container .todo-item .item__status--Canceled {
   background-color: var(--status-Canceled);
 }
-.todo-item .item__status--Paused {
+.item-container .todo-item .item__status--Paused {
   background-color: var(--status-Paused);
 }
-.todo-item .item__status * {
+.item-container .todo-item .item__status * {
   color: var(--scheme-500);
 }
-
-.item--selected {
-  box-shadow: 0px 0px 2px 1px var(--scheme-100);
+.item-container .item--selected {
+  transform: translateX(20px);
 }
 
 .tasks-list {
@@ -438,7 +464,7 @@ button {
 }
 
 .current-task {
-  border-radius: 0 20px;
+  border-radius: 0 20px 20px 0;
   padding: 10px;
   background-color: var(--scheme-500);
   color: var(--light-color);
@@ -464,52 +490,47 @@ button {
   justify-content: center;
   gap: 5px;
 }
-.current-task .task-status .status-control .status__actions .action-buttons {
-  border-radius: 5px;
-  padding: 5px;
-  cursor: pointer;
-}
-.current-task .task-status .status-control .status__actions .action-buttons:hover {
-  transform: scale(1.05);
-}
 .current-task .description {
   color: #F2E3D5;
   text-align: justify;
 }
 
-.menu-container {
+.sideMenu {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.sideMenu .menu-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  top: 10px;
-  left: 10px;
   width: -moz-fit-content;
   width: fit-content;
   height: -moz-fit-content;
   height: fit-content;
   gap: 2px;
 }
-.menu-container .items-container {
+.sideMenu .menu-container .items-container {
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
-.menu-container .items-container .item-container:hover .menu__item {
+.sideMenu .menu-container .items-container .item-container:hover .menu__item {
   transform: translateX(22px);
 }
-.menu-container .items-container .menu__item {
+.sideMenu .menu-container .items-container .menu__item {
   width: 100px;
   padding: 8px;
   margin: 0;
   background-color: #026773;
   text-align: end;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   cursor: pointer;
   font-weight: 500;
   font-size: 1.5rem;
 }
-.menu-container .menu__side-bar {
+.sideMenu .menu-container .menu__side-bar {
   width: 20px;
   align-self: stretch;
   background-color: var(--accent-color-1);
@@ -518,7 +539,7 @@ button {
 .clock-container {
   position: absolute;
   padding: 8px;
-  border-radius: 10px 0 0 10px;
+  border-radius: 0 0 0 10px;
   top: 10px;
   right: 10px;
   background-color: var(--accent-color-1);
@@ -527,6 +548,66 @@ button {
   margin: 0;
   font-weight: 600;
   font-size: 1.5rem;
+}
+
+.button {
+  cursor: pointer;
+}
+.button:hover {
+  transform: scale(1.05);
+}
+.button--small {
+  border-radius: 10px;
+  padding: 4px;
+}
+.button--Completed {
+  background-color: var(--status-Completed);
+}
+.button--InProgress {
+  background-color: var(--status-InProgress);
+}
+.button--ToDo {
+  background-color: var(--status-ToDo);
+}
+.button--Canceled {
+  background-color: var(--status-Canceled);
+}
+.button--Paused {
+  background-color: var(--status-Paused);
+}
+
+.interface {
+  background-color: #026773;
+  padding: 10px;
+  border-radius: 10px;
+  width: 700px;
+}
+.interface .tasks {
+  display: grid;
+  gap: 20px;
+  margin-bottom: 10px;
+  grid-template-columns: auto 1fr;
+}
+
+.message {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #F2E3D5;
+}
+.message--error {
+  color: var(--accent-color-1);
+}
+.message--loading {
+  color: var(--accent-color-3);
+}
+.message--notFound {
+  color: var(--accent-color-2);
+}
+.message--empty {
+  color: var(--dark-color);
 }
 
 footer {
@@ -572,15 +653,4 @@ main {
   position: relative;
   justify-content: space-evenly;
   padding: 10px;
-}
-main .interface {
-  background-color: #026773;
-  padding: 10px;
-  border-radius: 10px;
-}
-main .interface .tasks {
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
-  margin-bottom: 10px;
 }/*# sourceMappingURL=style.css.map */

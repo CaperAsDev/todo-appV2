@@ -8,7 +8,7 @@ export default function HeaderMessage() {
     error,
     loading,
     empty,
-    notFound,
+    noCoincidence,
     searchedTodo,
   } = useContext(TaskContext);
   if (error) {
@@ -23,7 +23,7 @@ export default function HeaderMessage() {
     return (
       <Message text="No tienes Tareas" type="empty" />
     );
-  } if (notFound) {
+  } if (noCoincidence) {
     return (
       <Message text="No se encontraron coincidencias para tu busqueda" type="notFound" />
     );

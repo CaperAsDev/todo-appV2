@@ -4,8 +4,13 @@ import Button, { Sizes } from '../atoms/Button';
 import { TaskContext } from '../../Contexts/TaskContext';
 
 function TaskDetails() {
-  const { firstTask, updateTask } = useContext(TaskContext);
-  const { id, status } = firstTask;
+  const { taskToRender, updateTask } = useContext(TaskContext);
+  if (taskToRender === undefined) {
+    return (
+      <p>Select a Task to see </p>
+    );
+  }
+  const { id, status } = taskToRender;
 
   let firstButtonText: string;
   let secondButtonText: string;
@@ -48,30 +53,30 @@ function TaskDetails() {
           size={Sizes.Small}
           action={firstTaskAction}
           content={firstButtonText}
-          customClass={`task--${status}`}
+          customClass={`button--${newStatusFirstButton}`}
         />
         <Button
           size={Sizes.Small}
           action={secondTaskAction}
           content={secondButtonText}
-          customClass={`task--${status}`}
+          customClass={`button--${newStatusSecondButton}`}
         />
       </>
     );
   };
   return (
     <div className="current-task">
-      <h3>{firstTask.title}</h3>
+      <h3>{taskToRender.title}</h3>
       <div className="task-status">
-        <p>{firstTask.importance}</p>
+        <p>{taskToRender.importance}</p>
         <div className="status-control">
-          <p className="status__title">{firstTask.status}</p>
+          <p className="status__title">{taskToRender.status}</p>
           <div className="status__actions">
             {statusActions()}
           </div>
         </div>
       </div>
-      <p className="description">{firstTask.description}</p>
+      <p className="description">{taskToRender.description}</p>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 /* eslint-disable react/require-default-props */
 export enum Sizes {
-  Small = 'Small',
-  Medium = 'Medium',
-  Big = 'Big',
+  Small = 'small',
+  Medium = 'medium',
+  Big = 'big',
 }
 type ButtonProps = {
   size:Sizes

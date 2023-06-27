@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-constructed-context-values */
-import React from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { CreateTaskDTO, Task, UpdateTask } from '../models';
 import useTasks from './Initializer';
 
@@ -15,7 +16,8 @@ type TaskContextProps = {
   addTask: (newTask: CreateTaskDTO) => Task
   updateTask: (id: string, changes: UpdateTask) => Task | undefined
   idSelected: string
-  firstTask: Task
+  taskToRender: Task | undefined
+  setIdSelected: React.Dispatch<React.SetStateAction<string>>
 };
 type TaskProviderProps = {
   children: JSX.Element
@@ -28,6 +30,8 @@ export function TaskProvider({ children }: TaskProviderProps) {
     addTask, empty, error, loading, updateTask, tasks,
   } = useTasks();
   const [searchValue, setSearchValue] = React.useState('');
+  const [idSelected, setIdSelected] = React.useState<Task['id']>('');
+
   const searchedTodo = tasks
     .filter((task) => {
       const descriptionTxt = task.description.toLowerCase().trim();
@@ -41,18 +45,22 @@ export function TaskProvider({ children }: TaskProviderProps) {
         isInTitle || isInDescription
       );
     });
-
   const noCoincidence = searchedTodo.length === 0;
-  let indexTask = -1;
-  let firstTask = searchedTodo[indexTask];
-  const [idSelected, setIdSelected] = React.useState<Task['id']>('');
+  const taskToRender = useMemo(() => {
+    if (!noCoincidence) {
+      const index = searchedTodo.findIndex((task) => task.id === idSelected);
+      if (index === -1) {
+        setIdSelected(searchedTodo[0].id);
+        return searchedTodo[0];
+      }
+      return searchedTodo[index];
+    }
 
-  if (!noCoincidence) {
-    indexTask = 0;
-    firstTask = searchedTodo[indexTask];
-    setIdSelected(firstTask.id);
-  }
-
+    return undefined;
+  }, [idSelected, searchedTodo]);
+  useEffect(() => {
+    if (!noCoincidence) setIdSelected(searchedTodo[0].id);
+  }, [searchValue]);
   return (
     <TaskContext.Provider value={{
       loading,
@@ -66,7 +74,8 @@ export function TaskProvider({ children }: TaskProviderProps) {
       searchedTodo,
       noCoincidence,
       idSelected,
-      firstTask,
+      taskToRender,
+      setIdSelected,
     }}
     >
       {children}

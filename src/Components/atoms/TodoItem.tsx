@@ -1,19 +1,20 @@
 import {
   BsFillCheckCircleFill, BsFillDashCircleFill, BsAlarmFill, BsCalendarWeek, BsCupHotFill,
 } from 'react-icons/bs';
+import { useContext } from 'react';
 import { TaskStatus } from '../../models';
+import { TaskContext } from '../../Contexts/TaskContext';
 
 type TodoItemProps = {
   title: string,
   status: TaskStatus,
   id: string,
-  setIdSelected: (id:string) => void,
-  idSelected: string,
 };
 
 export default function TodoItem({
-  title, status, id, setIdSelected, idSelected,
+  title, status, id,
 }: TodoItemProps) {
+  const { setIdSelected, idSelected } = useContext(TaskContext);
   const iconComponent = () => {
     let icon;
     if (status === TaskStatus.Completed)icon = <BsFillCheckCircleFill />;
@@ -29,17 +30,23 @@ export default function TodoItem({
   return (
     <button
       type="button"
-      className={isSelected ? 'todo-item item--selected' : 'todo-item'}
+      className="item-container"
       onClick={() => {
         setIdSelected(id);
       }}
     >
-      <p>{title}</p>
-      <span
-        className={`item__status item__status--${status}`}
+      <p
+        className={isSelected ? 'todo-item item--selected' : 'todo-item'}
       >
-        {iconComponent()}
-      </span>
+        <span>
+          {title}
+        </span>
+        <span
+          className={`item__status item__status--${status}`}
+        >
+          {iconComponent()}
+        </span>
+      </p>
     </button>
   );
 }

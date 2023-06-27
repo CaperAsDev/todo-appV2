@@ -1,11 +1,14 @@
+@use "../abstracts" as *;
+
 .interface{
   background-color: $Deep-Teal-Sea-3;
   padding: 10px;
   border-radius: 10px;
+  width: 700px;
   .tasks{
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    display: grid;
+    gap: 20px;
     margin-bottom: 10px;
+    grid-template-columns: auto 1fr;
   }
 }

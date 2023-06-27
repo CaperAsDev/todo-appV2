@@ -1,0 +1,25 @@
+@use "../abstracts" as *;
+
+.message {
+  text-align: center;
+  font: {
+    size: 1.5rem;
+    weight: bold;
+  }
+  padding: 5px;
+  border-radius: 10px;
+  background-color: $Deep-Teal-Sea-5;
+
+  &--error {
+    color: var(--accent-color-1);
+  }
+  &--loading {
+    color: var(--accent-color-3);
+  }
+  &--notFound {
+    color: var(--accent-color-2);
+  }
+  &--empty {
+    color: var(--dark-color);
+  }
+}

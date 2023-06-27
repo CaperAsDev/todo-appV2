@@ -41,6 +41,7 @@ export class TaskMemoryService implements TaskMemoryTypes {
       ...data,
       id: generarId(8),
     };
+    console.log('creando Tarea');
     return this.add(newData);
   }
 
@@ -48,6 +49,7 @@ export class TaskMemoryService implements TaskMemoryTypes {
     const newList = [...this.tasks, data];
     localStorage.setItem(this.itemName, JSON.stringify(orderTodos(newList)));
     this.tasks = newList;
+    console.log('agregando Tarea');
     return { data, newList };
   }
 
@@ -56,16 +58,17 @@ export class TaskMemoryService implements TaskMemoryTypes {
     let data: Task[];
     if (!jsonData) {
       localStorage.setItem(this.itemName, JSON.stringify(todoItems));
-      data = [];
+      data = todoItems;
     } else {
       data = JSON.parse(jsonData);
     }
-    console.log('Asking Data');
     this.tasks = data;
+    console.log('solicitando Tareas');
     return this.tasks;
   }
 
   findById(id: string): Task | undefined {
+    console.log('buscando Tarea');
     return this.tasks.find((task) => task.id === id);
   }
 
@@ -83,6 +86,7 @@ export class TaskMemoryService implements TaskMemoryTypes {
     });
     localStorage.setItem(this.itemName, JSON.stringify(orderTodos(updatedTasks)));
     this.tasks = updatedTasks;
+    console.log('actualizando Tarea');
     return { taskUpdated, updatedTasks };
   }
 }

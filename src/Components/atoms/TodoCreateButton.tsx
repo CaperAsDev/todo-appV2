@@ -14,5 +14,9 @@ export default function TodoCreateButton() {
     objetiveId: 'khfjfjf',
   };
 
-  return <button type="button" className="create-btn" onClick={() => addTask(defaultTask)}>Crear Tarea</button>;
+  return (
+    <button type="button" className="create-btn" onClick={() => addTask(defaultTask)}>
+      <p className="button-text">Crear tarea</p>
+    </button>
+  );
 }

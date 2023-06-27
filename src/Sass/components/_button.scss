@@ -1,8 +1,25 @@
 .button{
-  border-radius: 5px;
-  padding: 5px;
   cursor: pointer;
   &:hover{
     transform: scale(1.05);
+  }
+  &--small{
+    border-radius: 10px;
+    padding: 4px;
+  }
+  &--Completed{
+    background-color: var(--status-Completed);
+  }
+  &--InProgress{
+    background-color: var(--status-InProgress);
+  }
+  &--ToDo{
+    background-color: var(--status-ToDo);
+  }
+  &--Canceled{
+    background-color: var(--status-Canceled);
+  }
+  &--Paused{
+    background-color: var(--status-Paused);
   }
 }
