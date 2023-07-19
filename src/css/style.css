@@ -4,8 +4,8 @@
   --dark-color: #283963;
   --light-color: #f7a3df;
   --accent-color-1: #DE4E3E;
-  --accent-color-2: #F552E5;
-  --accent-color-3: #7B3EDE;
+  --accent-color-2: #9ae3ba;
+  --accent-color-3: #f49d51;
   --scheme-100: #C09DF5;
   --scheme-200: #AC8CDB;
   --scheme-300: #8E74B5;
@@ -330,6 +330,11 @@ template {
 }
 
 * {
+  margin: 0;
+  padding: 0;
+}
+
+* {
   font-family: "Nunito", sans-serif;
 }
 
@@ -370,7 +375,7 @@ p {
   border-radius: 0px 0px 10px 10px;
   font-weight: 600;
   cursor: pointer;
-  background-color: var(--status-Completed);
+  background-color: var(--accent-color-2);
   transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 .create-btn:hover .button-text {
@@ -465,17 +470,23 @@ p {
 
 .current-task {
   border-radius: 0 20px 20px 0;
-  padding: 10px;
   background-color: var(--scheme-500);
   color: var(--light-color);
 }
-.current-task h3 {
+.current-task .task-detail__title {
+  padding: 14px 0;
   color: var(--accent-color-1);
+  border-bottom: 2px solid var(--light-color);
+  text-align: center;
 }
 .current-task .task-status {
+  margin-top: 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   font-weight: 600;
+}
+.current-task .task-status .task-importance {
+  color: var(--accent-color-2);
 }
 .current-task .task-status .status-control {
   display: flex;
@@ -483,14 +494,33 @@ p {
   align-items: center;
   justify-content: center;
 }
+.current-task .task-status .status-control .status__title {
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--accent-color-2);
+  color: var(--accent-color-3);
+}
 .current-task .task-status .status-control .status__actions {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  align-items: stretch;
   gap: 5px;
 }
+.current-task .task-status .status-control .status__actions .button--small {
+  padding: 5px 10px;
+}
+.current-task .task-status .status-control .status__actions .button--small:first-child {
+  border-radius: 0;
+}
+.current-task .task-status .status-control .status__actions .button--small:last-child {
+  border-radius: 0 0 10px 10px;
+}
 .current-task .description {
+  margin: 30px 10px;
+  padding-left: 5px;
+  border-left: 1px solid var(--accent-color-3);
+  text-align: justify;
   color: #F2E3D5;
   text-align: justify;
 }
@@ -581,6 +611,9 @@ p {
   padding: 10px;
   border-radius: 10px;
   width: 700px;
+}
+.interface .counter {
+  margin: 10px 0;
 }
 .interface .tasks {
   display: grid;

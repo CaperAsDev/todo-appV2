@@ -2,25 +2,50 @@
 
 .current-task {
   border-radius: 0 20px 20px 0;
-  padding: 10px;
   background-color: var(--scheme-500);
   color: var(--light-color);
-  h3 {
+  .task-detail__title {
+    padding: 14px 0;
     color: var(--accent-color-1);
+    border-bottom: 2px solid var(--light-color);
+    text-align: center;
   }
   .task-status {
+    margin-top: 20px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     font-weight: 600;
+    .task-importance{
+      color: var(--accent-color-2);
+    }
     .status-control{
       @include centerFlex(column);
+      .status__title{
+        margin-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color-2);
+        color: var(--accent-color-3);
+      }
       .status__actions{
         @include centerFlex(column);
+        align-items: stretch;
         gap: 5px;
+        .button--small{
+          padding: 5px 10px;
+          &:first-child{
+            border-radius: 0;
+          }
+          &:last-child{
+            border-radius: 0 0 10px 10px;
+          }
+        }
       }
     }
   }
   .description {
+    margin: 30px 10px;
+    padding-left: 5px;
+    border-left: 1px solid var(--accent-color-3);
+    text-align: justify;
     color: $Deep-Teal-Sea-5;
     text-align: justify;
   }

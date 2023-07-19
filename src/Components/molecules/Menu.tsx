@@ -2,7 +2,6 @@ import MenuItems, { DataType } from '../atoms/MenuItems';
 import TodoCreateButton from '../atoms/TodoCreateButton';
 
 function Menu() {
-  console.log('Menu');
   return (
     <div className="sideMenu">
       <div className="menu-container">

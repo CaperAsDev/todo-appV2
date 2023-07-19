@@ -5,7 +5,6 @@ import Reloj from './Components/atoms/Clock';
 import TaksManager from './Components/organisms/TaskManager';
 
 export default function AppUI() {
-  console.log('AppUI');
   return (
     <>
       <Header userName="caper" />

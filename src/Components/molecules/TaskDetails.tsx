@@ -11,6 +11,12 @@ function TaskDetails() {
     );
   }
   const { id, status } = taskToRender;
+  /* const options = {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+  };
+  const myDate = new Date();
+  const dateFormated = myDate.toLocaleDateString('es', options)
+  console.log(dateFormated); */
 
   let firstButtonText: string;
   let secondButtonText: string;
@@ -35,11 +41,9 @@ function TaskDetails() {
   }
 
   const firstTaskAction = () => {
-    if (status === undefined) return;
     updateTask(id, { status: newStatusFirstButton });
   };
   const secondTaskAction = () => {
-    if (status === undefined) return;
     updateTask(id, { status: newStatusSecondButton });
   };
 
@@ -66,9 +70,11 @@ function TaskDetails() {
   };
   return (
     <div className="current-task">
-      <h3>{taskToRender.title}</h3>
+      <h3 className="task-detail__title">{taskToRender.title}</h3>
       <div className="task-status">
-        <p>{taskToRender.importance}</p>
+        <div className="task-info">
+          <p className="task-importance">{taskToRender.importance}</p>
+        </div>
         <div className="status-control">
           <p className="status__title">{taskToRender.status}</p>
           <div className="status__actions">

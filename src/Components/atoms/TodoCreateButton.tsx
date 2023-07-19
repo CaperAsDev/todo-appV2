@@ -9,9 +9,10 @@ export default function TodoCreateButton() {
     status: TaskStatus.ToDo,
     importance: TaskImportance.Important,
     description: 'Ir a cocinar las lentejas, ver si tenemos ingredientes, sino ir a comprarlos',
-    startDate: new Date(),
+    createdAt: new Date(),
+    startDate: null,
     endDate: null,
-    objetiveId: 'khfjfjf',
+    objetiveId: crypto.randomUUID(),
   };
 
   return (

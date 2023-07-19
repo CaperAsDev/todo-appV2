@@ -1,4 +1,4 @@
-import { orderTodos, todoItems } from './utils/utils';
+import { orderTodos } from './utils/utils';
 import { CreateTaskDTO, Task, UpdateTask } from './models';
 
 function generarId(longitud: number): string {
@@ -30,7 +30,6 @@ export class TaskMemoryService implements TaskMemoryTypes {
     private itemName: string,
   ) {
     this.tasks = this.getAllTasks();
-    console.log('service defined');
   }
 
   create(data: CreateTaskDTO):{
@@ -41,7 +40,6 @@ export class TaskMemoryService implements TaskMemoryTypes {
       ...data,
       id: generarId(8),
     };
-    console.log('creando Tarea');
     return this.add(newData);
   }
 
@@ -49,7 +47,6 @@ export class TaskMemoryService implements TaskMemoryTypes {
     const newList = [...this.tasks, data];
     localStorage.setItem(this.itemName, JSON.stringify(orderTodos(newList)));
     this.tasks = newList;
-    console.log('agregando Tarea');
     return { data, newList };
   }
 
@@ -57,18 +54,16 @@ export class TaskMemoryService implements TaskMemoryTypes {
     const jsonData = localStorage.getItem(this.itemName);
     let data: Task[];
     if (!jsonData) {
-      localStorage.setItem(this.itemName, JSON.stringify(todoItems));
-      data = todoItems;
+      localStorage.setItem(this.itemName, JSON.stringify([]));
+      data = [];
     } else {
       data = JSON.parse(jsonData);
     }
     this.tasks = data;
-    console.log('solicitando Tareas');
     return this.tasks;
   }
 
   findById(id: string): Task | undefined {
-    console.log('buscando Tarea');
     return this.tasks.find((task) => task.id === id);
   }
 
@@ -86,7 +81,6 @@ export class TaskMemoryService implements TaskMemoryTypes {
     });
     localStorage.setItem(this.itemName, JSON.stringify(orderTodos(updatedTasks)));
     this.tasks = updatedTasks;
-    console.log('actualizando Tarea');
     return { taskUpdated, updatedTasks };
   }
 }

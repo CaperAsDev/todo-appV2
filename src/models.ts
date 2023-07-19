@@ -3,7 +3,8 @@ interface Base {
   id: string;
   title: string;
   description: string;
-  startDate: Date;
+  createdAt: Date;
+  startDate: Date | null;
   endDate: Date | null;
 }
 export enum TaskStatus {
