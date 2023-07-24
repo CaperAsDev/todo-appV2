@@ -39,6 +39,7 @@ export class TaskMemoryService implements TaskMemoryTypes {
     const newData = {
       ...data,
       id: generarId(8),
+      createdAt: new Date(),
     };
     return this.add(newData);
   }

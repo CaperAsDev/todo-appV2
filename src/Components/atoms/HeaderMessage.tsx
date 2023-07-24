@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import Counter from './Counter';
 import Message from './Message';
 import { TaskContext } from '../../Contexts/TaskContext';
+import LoadingSkeleton from './LoadingSktn';
 
 export default function HeaderMessage() {
   const {
@@ -17,7 +18,7 @@ export default function HeaderMessage() {
     );
   } if (loading) {
     return (
-      <Message text="Cargando..." type="loading" />
+      <LoadingSkeleton />
     );
   } if (empty) {
     return (

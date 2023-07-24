@@ -4,8 +4,8 @@ interface Base {
   title: string;
   description: string;
   createdAt: Date;
-  startDate: Date | null;
-  endDate: Date | null;
+  startDate: number | undefined;
+  endDate: number | undefined;
 }
 export enum TaskStatus {
   Completed = 'Completed',
@@ -41,5 +41,5 @@ interface Category extends Base {
   goals: Array<Goal['id']>;
 }
 /* DTOs */
-export interface CreateTaskDTO extends Omit<Task, 'id'> {}
+export interface CreateTaskDTO extends Omit<Task, 'id' | 'createdAt'> {}
 export interface UpdateTask extends Partial<CreateTaskDTO> {}

@@ -5,8 +5,7 @@
   padding: 10px;
   border-radius: 20px;
   &:hover {
-    outline: 2px solid $Deep-Teal-Sea-1;
-    box-shadow: 1px 1px 3px 1px var(--accent-color-3);
+    box-shadow: 1px 1px 1px 1px var(--accent-color-2);
   }
   input {
     background-color: transparent;

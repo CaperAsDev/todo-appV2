@@ -11,17 +11,14 @@ function TaskDetails() {
     );
   }
   const { id, status } = taskToRender;
-  /* const options = {
-    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-  };
-  const myDate = new Date();
-  const dateFormated = myDate.toLocaleDateString('es', options)
-  console.log(dateFormated); */
+  const timeFormat = new Intl.DateTimeFormat('es', { dateStyle: 'long' });
 
   let firstButtonText: string;
   let secondButtonText: string;
   let newStatusFirstButton:TaskStatus;
   let newStatusSecondButton:TaskStatus;
+  let startDateString = taskToRender.startDate ? timeFormat.format(taskToRender?.startDate) : ' Not started yet';
+  let endDateString = taskToRender.endDate ? timeFormat.format(taskToRender?.endDate) : ' Not finished yet';
 
   if (status === TaskStatus.ToDo) {
     firstButtonText = 'Start';
@@ -41,15 +38,25 @@ function TaskDetails() {
   }
 
   const firstTaskAction = () => {
+    if (status === TaskStatus.ToDo) {
+      const taskUpdated = updateTask(id, { startDate: Date.now() });
+      startDateString = timeFormat.format(taskUpdated?.startDate);
+    }
+
     updateTask(id, { status: newStatusFirstButton });
   };
   const secondTaskAction = () => {
+    if (status === TaskStatus.InProgress) {
+      const taskUpdated = updateTask(id, { endDate: Date.now() });
+      endDateString = timeFormat.format(taskUpdated?.endDate);
+    }
+
     updateTask(id, { status: newStatusSecondButton });
   };
 
   const statusActions = () => {
-    if (status === TaskStatus.Completed) { return (<p>Notas de La tarea completada</p>); }
-    if (status === TaskStatus.Canceled) { return (<p>Notas de La tarea cancelada</p>); }
+    if (status === TaskStatus.Completed) { return (<p className="status-note">Notas de La tarea completada</p>); }
+    if (status === TaskStatus.Canceled) { return (<p className="status-note">Notas de La tarea cancelada</p>); }
 
     return (
       <>
@@ -73,10 +80,14 @@ function TaskDetails() {
       <h3 className="task-detail__title">{taskToRender.title}</h3>
       <div className="task-status">
         <div className="task-info">
-          <p className="task-importance">{taskToRender.importance}</p>
+          <p className={`task-importance task-importance--${taskToRender.importance}`}>{taskToRender.importance}</p>
+          <div className="info-dates">
+            <p className={`info__date info__date--start ${!startDateString.toLocaleLowerCase().includes('not')}`}>{startDateString}</p>
+            <p className={`info__date info__date--end ${!endDateString.toLocaleLowerCase().includes('not')}`}>{endDateString}</p>
+          </div>
         </div>
         <div className="status-control">
-          <p className="status__title">{taskToRender.status}</p>
+          <p className={`status__title status__title--${taskToRender.status}`}>{taskToRender.status}</p>
           <div className="status__actions">
             {statusActions()}
           </div>

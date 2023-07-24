@@ -5,7 +5,8 @@
   background-color: var(--scheme-500);
   color: var(--light-color);
   .task-detail__title {
-    padding: 14px 0;
+    font-size: 1.3rem;
+    padding: 12px 0;
     color: var(--accent-color-1);
     border-bottom: 2px solid var(--light-color);
     text-align: center;
@@ -15,26 +16,67 @@
     display: flex;
     justify-content: space-around;
     font-weight: 600;
-    .task-importance{
-      color: var(--accent-color-2);
-    }
-    .status-control{
+    .task-info {
       @include centerFlex(column);
-      .status__title{
-        margin-bottom: 10px;
-        border-bottom: 2px solid var(--accent-color-2);
-        color: var(--accent-color-3);
+      justify-content: space-between;
+      .task-importance {
+        text-align: center;
+        padding-bottom: 2px;
+        font-size: 1.2rem;
+        color: var(--accent-color-2);
       }
-      .status__actions{
+      .info-dates {
         @include centerFlex(column);
+        margin-top: 15px;
+        gap: 10px;
+        .info__date {
+          font-weight: lighter;
+          &--start {
+            color: var(--accent-color-3);
+          }
+          &--end {
+            color: var(--accent-color-1);
+          }
+        }
+      }
+    }
+    .status-control {
+      @include centerFlex(column);
+      justify-content: space-between;
+      .status__title {
+        font-size: 1.2rem;
+        color: var(--accent-color-2);
+        &--Canceled{
+          color: var(--status-Canceled)
+        }
+        &--Completed{
+          color: var(--status-Completed)
+        }
+        &--ToDo{
+          color: var(--status-ToDo)
+        }
+        &--Paused{
+          color: var(--status-Paused)
+        }
+        &--InProgress{
+          color: var(--status-InProgress)
+        }
+      }
+      .status__actions {
+        @include centerFlex(column);
+        margin-top: 15px;
         align-items: stretch;
         gap: 5px;
-        .button--small{
+        .status-note {
+          font-weight: lighter;
+          color: $Deep-Teal-Sea-5;
+        }
+        .button--small {
           padding: 5px 10px;
-          &:first-child{
+          &:first-child {
             border-radius: 0;
           }
-          &:last-child{
+          &:last-child {
             border-radius: 0 0 10px 10px;
           }
         }

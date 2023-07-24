@@ -3,9 +3,9 @@
 :root {
   --dark-color: #283963;
   --light-color: #f7a3df;
-  --accent-color-1: #DE4E3E;
+  --accent-color-1: #f2753f;
   --accent-color-2: #9ae3ba;
-  --accent-color-3: #f49d51;
+  --accent-color-3: #f4be51;
   --scheme-100: #C09DF5;
   --scheme-200: #AC8CDB;
   --scheme-300: #8E74B5;
@@ -451,8 +451,7 @@ p {
   border-radius: 20px;
 }
 .search-box:hover {
-  outline: 2px solid #012E40;
-  box-shadow: 1px 1px 3px 1px var(--accent-color-3);
+  box-shadow: 1px 1px 1px 1px var(--accent-color-2);
 }
 .search-box input {
   background-color: transparent;
@@ -474,7 +473,8 @@ p {
   color: var(--light-color);
 }
 .current-task .task-detail__title {
-  padding: 14px 0;
+  font-size: 1.3rem;
+  padding: 12px 0;
   color: var(--accent-color-1);
   border-bottom: 2px solid var(--light-color);
   text-align: center;
@@ -485,27 +485,74 @@ p {
   justify-content: space-around;
   font-weight: 600;
 }
-.current-task .task-status .task-importance {
+.current-task .task-status .task-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+}
+.current-task .task-status .task-info .task-importance {
+  text-align: center;
+  padding-bottom: 2px;
+  font-size: 1.2rem;
   color: var(--accent-color-2);
+}
+.current-task .task-status .task-info .info-dates {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 10px;
+}
+.current-task .task-status .task-info .info-dates .info__date {
+  font-weight: lighter;
+}
+.current-task .task-status .task-info .info-dates .info__date--start {
+  color: var(--accent-color-3);
+}
+.current-task .task-status .task-info .info-dates .info__date--end {
+  color: var(--accent-color-1);
 }
 .current-task .task-status .status-control {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  justify-content: space-between;
 }
 .current-task .task-status .status-control .status__title {
-  margin-bottom: 10px;
-  border-bottom: 2px solid var(--accent-color-2);
-  color: var(--accent-color-3);
+  font-size: 1.2rem;
+  color: var(--accent-color-2);
+}
+.current-task .task-status .status-control .status__title--Canceled {
+  color: var(--status-Canceled);
+}
+.current-task .task-status .status-control .status__title--Completed {
+  color: var(--status-Completed);
+}
+.current-task .task-status .status-control .status__title--ToDo {
+  color: var(--status-ToDo);
+}
+.current-task .task-status .status-control .status__title--Paused {
+  color: var(--status-Paused);
+}
+.current-task .task-status .status-control .status__title--InProgress {
+  color: var(--status-InProgress);
 }
 .current-task .task-status .status-control .status__actions {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: 15px;
   align-items: stretch;
   gap: 5px;
+}
+.current-task .task-status .status-control .status__actions .status-note {
+  font-weight: lighter;
+  color: #F2E3D5;
 }
 .current-task .task-status .status-control .status__actions .button--small {
   padding: 5px 10px;
@@ -643,6 +690,63 @@ p {
   color: var(--dark-color);
 }
 
+.skl {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.skl .skl__title {
+  width: 90%;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #F2E3D5;
+}
+.skl .skl__bottom {
+  width: 90%;
+  height: 250px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.skl .skl__bottom .items {
+  width: 170px;
+  height: 100%;
+  margin-right: 20px;
+}
+.skl .skl__bottom .items .item {
+  background-color: #F2E3D5;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 5px;
+  border-radius: 10px 0 0 10px;
+}
+.skl .skl__bottom .items .item:first-child {
+  transform: translateX(18px);
+}
+.skl .skl__bottom .right-box {
+  width: 450px;
+  height: 100%;
+  background-color: #F2E3D5;
+  border-radius: 0 10px 10px 0;
+}
+
+.animated {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
 footer {
   position: absolute;
   bottom: 0;

@@ -1,0 +1,51 @@
+@use "../abstracts" as *;
+
+.skl {
+  width: 100%;
+  height: 100%;
+  @include centerFlex(column);
+  gap: 10px;
+  .skl__title {
+    width: 90%;
+    height: 50px;
+    border-radius: 10px;
+    background-color: $Deep-Teal-Sea-5;
+  }
+  .skl__bottom {
+    width: 90%;
+    height: 250px;
+    @include centerFlex();
+    .items {
+      width: 170px;
+      height: 100%;
+      margin-right: 20px;
+      .item {
+        background-color: $Deep-Teal-Sea-5;
+        width: 100%;
+        height: 50px;
+        margin-bottom: 5px;
+        border-radius: 10px 0 0 10px;
+        &:first-child{
+          transform: translateX(18px);
+        }
+      }
+    }
+    .right-box {
+      width: 450px;
+      height: 100%;
+      background-color: $Deep-Teal-Sea-5;
+      border-radius: 0 10px 10px 0;
+    }
+  }
+}
+.animated{
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%);
+  }
+  100% {
+    background-color: hsl(200, 20%, 95%);
+  }
+}
