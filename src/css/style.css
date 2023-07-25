@@ -637,6 +637,11 @@ p {
   border-radius: 10px;
   padding: 4px;
 }
+.button--medium {
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.2rem;
+}
 .button--Completed {
   background-color: var(--status-Completed);
 }
@@ -747,6 +752,62 @@ p {
     background-color: hsl(200, 20%, 95%);
   }
 }
+#modal {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+}
+#modal .modal__background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  background-color: var(--scheme-500);
+  opacity: 70%;
+}
+#modal .modal {
+  position: absolute;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+#modal .modal .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #3CA6A6;
+  border-radius: 20px;
+  width: 300px;
+  height: 450px;
+}
+#modal .modal .form > * {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+#modal .modal .form label {
+  color: var(--scheme-500);
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+#modal .modal .form input, #modal .modal .form select, #modal .modal .form textArea {
+  color: #024959;
+  padding: 5px;
+  border-radius: 10px;
+  border-style: none;
+  outline-style: none;
+}
+
 footer {
   position: absolute;
   bottom: 0;

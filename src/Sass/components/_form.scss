@@ -1,0 +1,51 @@
+@use "../abstracts" as *;
+
+#modal{
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  .modal__background{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1;
+    background-color: var(--scheme-500);
+    opacity: 70%;
+  }
+  .modal{
+    position: absolute;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    display: grid;
+    place-items: center;
+    .form{
+      @include centerFlex(column);
+      gap: 10px;
+      background-color: $Deep-Teal-Sea-4;
+      border-radius: 20px;
+      width: 300px;
+      height: 450px;
+      & > * {
+        @include centerFlex(column);
+        margin-bottom: 10px;
+      }
+      & label{
+        color: var(--scheme-500);
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+      }
+      & input, select, textArea{
+        color: $Deep-Teal-Sea-2;
+        padding: 5px;
+        border-radius: 10px;
+        border-style: none;
+        outline-style: none;
+      }
+    }
+  }
+}

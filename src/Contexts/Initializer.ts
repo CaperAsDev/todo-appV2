@@ -11,6 +11,7 @@ export default function useTasks() {
   const [empty, setEmpty] = React.useState(true);
 
   const [tasks, setTasks] = React.useState<Array<Task>>([]);
+
   useEffect(() => {
     setLoading(true);
     let initialstate:Task[];

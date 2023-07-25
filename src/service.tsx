@@ -1,15 +1,8 @@
 import { orderTodos } from './utils/utils';
-import { CreateTaskDTO, Task, UpdateTask } from './models';
+import {
+  CreateTaskDTO, Task, TaskStatus, UpdateTask,
+} from './models';
 
-function generarId(longitud: number): string {
-  const caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let idGenerado = '';
-  for (let i = 0; i < longitud; i += 1) {
-    const indice = Math.floor(Math.random() * caracteres.length);
-    idGenerado += caracteres.charAt(indice);
-  }
-  return idGenerado;
-}
 export type TaskMemoryTypes = {
   create: (data: CreateTaskDTO) => {
     data: Task;
@@ -38,8 +31,12 @@ export class TaskMemoryService implements TaskMemoryTypes {
   } {
     const newData = {
       ...data,
-      id: generarId(8),
+      id: crypto.randomUUID(),
       createdAt: new Date(),
+      status: TaskStatus.ToDo,
+      startDate: undefined,
+      endDate: undefined,
+      objetiveId: crypto.randomUUID(),
     };
     return this.add(newData);
   }

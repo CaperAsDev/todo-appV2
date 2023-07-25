@@ -18,6 +18,8 @@ type TaskContextProps = {
   idSelected: string
   taskToRender: Task | undefined
   setIdSelected: React.Dispatch<React.SetStateAction<string>>
+  openModal: boolean
+  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
 };
 type TaskProviderProps = {
   children: JSX.Element
@@ -31,6 +33,7 @@ export function TaskProvider({ children }: TaskProviderProps) {
   } = useTasks();
   const [searchValue, setSearchValue] = React.useState('');
   const [idSelected, setIdSelected] = React.useState<Task['id']>('');
+  const [openModal, setOpenModal] = React.useState(true);
 
   const searchedTodo = tasks
     .filter((task) => {
@@ -76,6 +79,8 @@ export function TaskProvider({ children }: TaskProviderProps) {
       idSelected,
       taskToRender,
       setIdSelected,
+      openModal,
+      setOpenModal,
     }}
     >
       {children}

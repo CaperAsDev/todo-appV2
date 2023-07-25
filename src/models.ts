@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
 interface Base {
-  id: string;
+  id: `${string}-${string}-${string}-${string}-${string}`;
   title: string;
   description: string;
   createdAt: Date;
@@ -41,5 +41,5 @@ interface Category extends Base {
   goals: Array<Goal['id']>;
 }
 /* DTOs */
-export interface CreateTaskDTO extends Omit<Task, 'id' | 'createdAt'> {}
+export interface CreateTaskDTO extends Pick<Task, 'title' | 'description' | 'importance'> {}
 export interface UpdateTask extends Partial<CreateTaskDTO> {}
