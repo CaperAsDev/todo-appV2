@@ -1,7 +1,7 @@
 @use "../abstracts" as *;
 
 .clock-container{
-  position: absolute;
+  position: sticky;
   padding: 8px;
   border-radius: 0 0 0 10px;
   top: 10px;

@@ -8,13 +8,10 @@
   }
   padding: 5px;
   border-radius: 10px;
-  background-color: $Deep-Teal-Sea-5;
+  background-color: $Deep-Teal-Sea-4;
 
   &--error {
     color: var(--accent-color-1);
-  }
-  &--loading {
-    color: var(--accent-color-3);
   }
   &--notFound {
     color: var(--accent-color-2);

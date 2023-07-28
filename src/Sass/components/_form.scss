@@ -1,50 +1,79 @@
 @use "../abstracts" as *;
 
-#modal{
-  width: 100vw;
-  height: 100vh;
+.modal__background {
+  width: 100%;
+  height: 100%;
   position: absolute;
   top: 0;
-  .modal__background{
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    z-index: 1;
-    background-color: var(--scheme-500);
-    opacity: 70%;
-  }
-  .modal{
-    position: absolute;
-    top: 0;
+  background-color: var(--scheme-500);
+  opacity: 70%;
+}
+.modal {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  .form-container {
+    position: relative;
     z-index: 10;
-    width: 100%;
-    height: 100%;
-    display: grid;
-    place-items: center;
-    .form{
-      @include centerFlex(column);
+    .form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
       gap: 10px;
       background-color: $Deep-Teal-Sea-4;
       border-radius: 20px;
       width: 300px;
       height: 450px;
-      & > * {
+      .form-header {
+        text-align: center;
+        background-color: $Deep-Teal-Sea-3;
+        padding: 15px;
+        font-size: 1.4rem;
+      }
+      .form-inputs {
         @include centerFlex(column);
-        margin-bottom: 10px;
+        gap: 15px;
+        & label {
+          @include centerFlex(column);
+          color: var(--scheme-500);
+          font-weight: bold;
+          font-size: 1.2rem;
+          margin-bottom: 10px;
+        }
+        & input,
+        select,
+        textArea {
+          color: $Deep-Teal-Sea-2;
+          padding: 5px;
+          border-radius: 10px;
+          border-style: none;
+          outline-style: none;
+          &:focus {
+            outline: 1px solid var(--accent-color-3);
+            box-shadow: 1px 1px 2px 1px var(--accent-color-1);
+          }
+        }
+        & textArea {
+          width: 250px;
+          height: 70px;
+        }
       }
-      & label{
-        color: var(--scheme-500);
+      .create-task-button {
+        border-radius: 0;
         font-weight: bold;
-        font-size: 1.2rem;
-        margin-bottom: 10px;
-      }
-      & input, select, textArea{
-        color: $Deep-Teal-Sea-2;
-        padding: 5px;
-        border-radius: 10px;
-        border-style: none;
-        outline-style: none;
+        transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+        &:hover {
+          transform: scale(1.1);
+          outline:2px solid var(--accent-color-2);
+        }
+        &:focus{
+          transform: scale(1.1);
+          outline:2px solid var(--accent-color-2);
+        }
       }
     }
   }

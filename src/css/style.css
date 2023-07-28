@@ -344,8 +344,9 @@ html {
 }
 
 body {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
 button {
@@ -359,6 +360,11 @@ button {
 p {
   margin: 0;
   padding: 0;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
 }
 
 .counter {
@@ -384,6 +390,7 @@ p {
 }
 
 .item-container {
+  scroll-snap-align: start;
   background-color: transparent;
   cursor: pointer;
 }
@@ -438,20 +445,32 @@ p {
 }
 
 .tasks-list {
+  height: 425px;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   gap: 5px;
   margin: 0;
-  padding: 0;
+  padding-right: 20px;
+  border-right: 2px solid var(--scheme-500);
+  scroll-snap-type: y mandatory;
 }
 
 .search-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   background-color: #3CA6A6;
   padding: 10px;
   border-radius: 20px;
 }
 .search-box:hover {
-  box-shadow: 1px 1px 1px 1px var(--accent-color-2);
+  box-shadow: 0px 0px 2px 1px var(--accent-color-2);
+}
+.search-box svg {
+  color: var(--accent-color-2);
+  font-size: 1.2rem;
 }
 .search-box input {
   background-color: transparent;
@@ -471,6 +490,8 @@ p {
   border-radius: 0 20px 20px 0;
   background-color: var(--scheme-500);
   color: var(--light-color);
+  height: -moz-fit-content;
+  height: fit-content;
 }
 .current-task .task-detail__title {
   font-size: 1.3rem;
@@ -573,7 +594,7 @@ p {
 }
 
 .sideMenu {
-  position: absolute;
+  position: sticky;
   top: 10px;
   left: 10px;
 }
@@ -614,7 +635,7 @@ p {
 }
 
 .clock-container {
-  position: absolute;
+  position: sticky;
   padding: 8px;
   border-radius: 0 0 0 10px;
   top: 10px;
@@ -658,18 +679,35 @@ p {
   background-color: var(--status-Paused);
 }
 
+.closeButton {
+  position: absolute;
+  height: 32px;
+  top: -20px;
+  right: -20px;
+  font-size: 2rem;
+  color: var(--status-Canceled);
+  box-shadow: 0px 0px 1px 7px #026773;
+  background-color: transparent;
+  border-radius: 50%;
+}
+.closeButton:hover svg {
+  transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
 .interface {
   background-color: #026773;
   padding: 10px;
   border-radius: 10px;
   width: 700px;
+  margin: 10px 0;
 }
 .interface .counter {
   margin: 10px 0;
 }
 .interface .tasks {
   display: grid;
-  gap: 20px;
   margin-bottom: 10px;
   grid-template-columns: auto 1fr;
 }
@@ -680,13 +718,10 @@ p {
   font-weight: bold;
   padding: 5px;
   border-radius: 10px;
-  background-color: #F2E3D5;
+  background-color: #3CA6A6;
 }
 .message--error {
   color: var(--accent-color-1);
-}
-.message--loading {
-  color: var(--accent-color-3);
 }
 .message--notFound {
   color: var(--accent-color-2);
@@ -752,65 +787,95 @@ p {
     background-color: hsl(200, 20%, 95%);
   }
 }
-#modal {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  top: 0;
-}
-#modal .modal__background {
+.modal__background {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
-  z-index: 1;
   background-color: var(--scheme-500);
   opacity: 70%;
 }
-#modal .modal {
+
+.modal {
   position: absolute;
   top: 0;
-  z-index: 10;
   width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
 }
-#modal .modal .form {
+.modal .form-container {
+  position: relative;
+  z-index: 10;
+}
+.modal .form-container .form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  overflow: hidden;
   gap: 10px;
   background-color: #3CA6A6;
   border-radius: 20px;
   width: 300px;
   height: 450px;
 }
-#modal .modal .form > * {
+.modal .form-container .form .form-header {
+  text-align: center;
+  background-color: #026773;
+  padding: 15px;
+  font-size: 1.4rem;
+}
+.modal .form-container .form .form-inputs {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  gap: 15px;
 }
-#modal .modal .form label {
+.modal .form-container .form .form-inputs label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: var(--scheme-500);
   font-weight: bold;
   font-size: 1.2rem;
   margin-bottom: 10px;
 }
-#modal .modal .form input, #modal .modal .form select, #modal .modal .form textArea {
+.modal .form-container .form .form-inputs input,
+.modal .form-container .form .form-inputs select,
+.modal .form-container .form .form-inputs textArea {
   color: #024959;
   padding: 5px;
   border-radius: 10px;
   border-style: none;
   outline-style: none;
 }
+.modal .form-container .form .form-inputs input:focus,
+.modal .form-container .form .form-inputs select:focus,
+.modal .form-container .form .form-inputs textArea:focus {
+  outline: 1px solid var(--accent-color-3);
+  box-shadow: 1px 1px 2px 1px var(--accent-color-1);
+}
+.modal .form-container .form .form-inputs textArea {
+  width: 250px;
+  height: 70px;
+}
+.modal .form-container .form .create-task-button {
+  border-radius: 0;
+  font-weight: bold;
+  transition: transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+.modal .form-container .form .create-task-button:hover {
+  transform: scale(1.1);
+  outline: 2px solid var(--accent-color-2);
+}
+.modal .form-container .form .create-task-button:focus {
+  transform: scale(1.1);
+  outline: 2px solid var(--accent-color-2);
+}
 
 footer {
-  position: absolute;
-  bottom: 0;
   height: 40px;
   width: 100%;
   background-color: #024959;
@@ -848,7 +913,11 @@ main {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100vh - 100px);
+  overflow: scroll;
   position: relative;
-  justify-content: space-evenly;
-  padding: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
 }/*# sourceMappingURL=style.css.map */

@@ -1,7 +1,7 @@
 @use "../abstracts" as *;
 
 .sideMenu {
-  position: absolute;
+  position: sticky;
   top: 10px;
   left: 10px;
   .menu-container {

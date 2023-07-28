@@ -42,8 +42,8 @@ export class TaskMemoryService implements TaskMemoryTypes {
   }
 
   add(data: Task) {
-    const newList = [...this.tasks, data];
-    localStorage.setItem(this.itemName, JSON.stringify(orderTodos(newList)));
+    const newList = orderTodos([...this.tasks, data]);
+    localStorage.setItem(this.itemName, JSON.stringify(newList));
     this.tasks = newList;
     return { data, newList };
   }
@@ -70,14 +70,14 @@ export class TaskMemoryService implements TaskMemoryTypes {
     updatedTasks: Task[];
   } {
     let taskUpdated;
-    const updatedTasks = this.tasks.map((task) => {
+    const updatedTasks = orderTodos(this.tasks.map((task) => {
       if (task.id === id) {
         taskUpdated = { ...task, ...changes };
         return taskUpdated;
       }
       return task;
-    });
-    localStorage.setItem(this.itemName, JSON.stringify(orderTodos(updatedTasks)));
+    }));
+    localStorage.setItem(this.itemName, JSON.stringify(updatedTasks));
     this.tasks = updatedTasks;
     return { taskUpdated, updatedTasks };
   }

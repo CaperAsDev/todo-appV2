@@ -1,7 +1,11 @@
 .tasks-list{
+  height: 425px;
+  overflow: scroll;
   display: flex;
   flex-direction: column;
   gap: 5px;
   margin: 0;
-  padding: 0;
+  padding-right: 20px;
+  border-right: 2px solid var(--scheme-500);
+  scroll-snap-type: y mandatory;
 }

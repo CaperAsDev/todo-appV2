@@ -2,7 +2,11 @@
 
 main{
   @include centerFlex;
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(100vh - 100px);
+  overflow: scroll;
   position: relative;
-  justify-content: space-evenly;
-  padding: 10px;
+  justify-content: space-between;
+  align-items: flex-start;
 }

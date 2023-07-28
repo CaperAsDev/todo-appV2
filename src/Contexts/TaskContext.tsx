@@ -14,10 +14,10 @@ type TaskContextProps = {
   searchedTodo: Task[]
   noCoincidence: boolean
   addTask: (newTask: CreateTaskDTO) => Task
-  updateTask: (id: string, changes: UpdateTask) => Task | undefined
+  updateTask: (id: `${string}-${string}-${string}-${string}-${string}`, changes: UpdateTask) => Task | undefined
   idSelected: string
   taskToRender: Task | undefined
-  setIdSelected: React.Dispatch<React.SetStateAction<string>>
+  setIdSelected: React.Dispatch<React.SetStateAction<`${string}-${string}-${string}-${string}-${string}`>>
   openModal: boolean
   setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
 };
@@ -32,8 +32,8 @@ export function TaskProvider({ children }: TaskProviderProps) {
     addTask, empty, error, loading, updateTask, tasks,
   } = useTasks();
   const [searchValue, setSearchValue] = React.useState('');
-  const [idSelected, setIdSelected] = React.useState<Task['id']>('');
-  const [openModal, setOpenModal] = React.useState(true);
+  const [idSelected, setIdSelected] = React.useState<Task['id']>('a-a-a-a-a');
+  const [openModal, setOpenModal] = React.useState(false);
 
   const searchedTodo = tasks
     .filter((task) => {

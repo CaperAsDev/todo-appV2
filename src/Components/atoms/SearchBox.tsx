@@ -1,3 +1,5 @@
+import { BsSearch } from 'react-icons/bs';
+
 type TodoSearchProps = {
   setSearchValue: React.Dispatch<React.SetStateAction<string>>
   searchValue: string
@@ -11,7 +13,7 @@ export default function TodoSearch({ setSearchValue, searchValue }: TodoSearchPr
   };
   return (
     <div className="search-box">
-      <span className="search__icon">🔍</span>
+      <BsSearch />
       <input type="text" placeholder="Jugar un Aram" onChange={inputHandler} value={searchValue} />
     </div>
   );

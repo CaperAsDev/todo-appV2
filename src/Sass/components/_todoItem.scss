@@ -1,5 +1,6 @@
 @use "../abstracts" as *;
 .item-container {
+  scroll-snap-align: start;
   background-color: transparent;
   cursor: pointer;
   &:hover .todo-item{

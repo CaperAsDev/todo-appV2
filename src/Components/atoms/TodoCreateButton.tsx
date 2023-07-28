@@ -1,18 +1,11 @@
-import React from 'react';
-import { TaskImportance } from '../../models';
+import { useContext } from 'react';
 import { TaskContext } from '../../Contexts/TaskContext';
 
 export default function TodoCreateButton() {
-  //! Aqui se deberia crear la funcion para abrir el modal del formulario
-  const { addTask } = React.useContext(TaskContext);
-  const defaultTask = {
-    title: 'Hacer el almuerzo',
-    importance: TaskImportance.Important,
-    description: 'Ir a cocinar las lentejas, ver si tenemos ingredientes, sino ir a comprarlos',
-  };
+  const { setOpenModal } = useContext(TaskContext);
 
   return (
-    <button type="button" className="create-btn" onClick={() => addTask(defaultTask)}>
+    <button type="button" className="create-btn" onClick={() => setOpenModal(true)}>
       <p className="button-text">Crear tarea</p>
     </button>
   );

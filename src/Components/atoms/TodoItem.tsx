@@ -8,7 +8,7 @@ import { TaskContext } from '../../Contexts/TaskContext';
 type TodoItemProps = {
   title: string,
   status: TaskStatus,
-  id: string,
+  id: `${string}-${string}-${string}-${string}-${string}`,
 };
 
 export default function TodoItem({

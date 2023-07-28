@@ -5,8 +5,9 @@ html{
   color: abstracts.$Deep-Teal-Sea-5;
 }
 body{
-  width: 100%;
-  height: 100%; 
+  width: 100vw;
+  height: 100vh; 
+  overflow: hidden;
 }
 button{
   background-color: var(--accent-color-1);
@@ -18,4 +19,8 @@ button{
 p{
   margin: 0;
   padding: 0;
+}
+#root{
+  width: 100%;
+  height: 100%;
 }

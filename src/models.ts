@@ -26,6 +26,7 @@ export interface Task extends Base {
   importance: TaskImportance;
   seasons?: [{ from: Date, until: Date }];
   timeEstimated?: number;
+  // No deberia ser un numero sino un enum con diferentes opciones asi como el de importancia.
   objetiveId : Objetive['id'];
 }
 interface Objetive extends Base {

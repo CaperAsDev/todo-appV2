@@ -7,8 +7,6 @@ type HeaderProps = {
 };
 
 function Header({ userName }: HeaderProps) {
-  console.log('Header');
-
   const { setSearchValue, searchValue } = useContext(TaskContext);
   return (
     <header>
