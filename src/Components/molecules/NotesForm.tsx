@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useContext, useState } from 'react';
-import CloseButton from './CloseButton';
-import Button, { Sizes } from './Button';
+import CloseButton from '../atoms/CloseButton';
+import Button, { Sizes } from '../atoms/Button';
 import { TaskContext } from '../../Contexts/TaskContext';
 
 type NoteFormProps = {

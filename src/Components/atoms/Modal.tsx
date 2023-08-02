@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { useContext } from 'react';
 import { createPortal } from 'react-dom';
 
 type ModalProps = {
@@ -20,5 +19,5 @@ export default function Modal({ children, toClose }: ModalProps) {
       </div>,
       target,
     );
-  }
+  } return null;
 }

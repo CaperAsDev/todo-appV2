@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Button, { Sizes } from '../atoms/Button';
-import NotesForm from '../atoms/NotesForm';
+import NotesForm from './NotesForm';
 import Modal from '../atoms/Modal';
 import NotesList from './NotesLists';
 

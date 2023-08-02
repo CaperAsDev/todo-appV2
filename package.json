@@ -30,5 +30,6 @@
     "eslint-plugin-react-refresh": "^0.3.4",
     "typescript": "^5.0.2",
     "vite": "^4.3.9"
-  }
+  },
+  "homepage": "/Users/caper/Downloads/cursos platzi/React/introduccion/todo-appV2/dist/"
 }
