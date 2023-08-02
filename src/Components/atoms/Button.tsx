@@ -14,6 +14,8 @@ export default function Button({
   size, content, action, customClass = '',
 }: ButtonProps) {
   return (
-    <button onClick={action} type="button" className={`button button--${size} ${customClass}`}>{content}</button>
+    <button onClick={action} type="button" className={`button button--${size} ${customClass}`}>
+      <p className="button-text">{content}</p>
+    </button>
   );
 }

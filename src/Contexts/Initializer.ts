@@ -34,7 +34,6 @@ export default function useTasks() {
   const addTask = (newTask: CreateTaskDTO):Task => {
     const { data, newList } = taskService.create(newTask);
     setTasks(newList);
-
     return data;
   };
 

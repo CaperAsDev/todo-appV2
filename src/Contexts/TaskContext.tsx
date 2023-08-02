@@ -1,26 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/jsx-no-constructed-context-values */
 import React, { useEffect, useMemo } from 'react';
-import { CreateTaskDTO, Task, UpdateTask } from '../models';
+import { Task, TaskContextProps } from '../models';
 import useTasks from './Initializer';
 
-type TaskContextProps = {
-  error: boolean
-  loading: boolean
-  empty: boolean
-  setSearchValue:React.Dispatch<React.SetStateAction<string>>
-  searchValue:string
-  tasks:Task[]
-  searchedTodo: Task[]
-  noCoincidence: boolean
-  addTask: (newTask: CreateTaskDTO) => Task
-  updateTask: (id: `${string}-${string}-${string}-${string}-${string}`, changes: UpdateTask) => Task | undefined
-  idSelected: string
-  taskToRender: Task | undefined
-  setIdSelected: React.Dispatch<React.SetStateAction<`${string}-${string}-${string}-${string}-${string}`>>
-  openModal: boolean
-  setOpenModal: React.Dispatch<React.SetStateAction<boolean>>
-};
 type TaskProviderProps = {
   children: JSX.Element
 };
@@ -33,7 +16,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
   } = useTasks();
   const [searchValue, setSearchValue] = React.useState('');
   const [idSelected, setIdSelected] = React.useState<Task['id']>('a-a-a-a-a');
-  const [openModal, setOpenModal] = React.useState(false);
 
   const searchedTodo = tasks
     .filter((task) => {
@@ -61,9 +43,11 @@ export function TaskProvider({ children }: TaskProviderProps) {
 
     return undefined;
   }, [idSelected, searchedTodo]);
+
   useEffect(() => {
     if (!noCoincidence) setIdSelected(searchedTodo[0].id);
   }, [searchValue]);
+
   return (
     <TaskContext.Provider value={{
       loading,
@@ -79,8 +63,6 @@ export function TaskProvider({ children }: TaskProviderProps) {
       idSelected,
       taskToRender,
       setIdSelected,
-      openModal,
-      setOpenModal,
     }}
     >
       {children}

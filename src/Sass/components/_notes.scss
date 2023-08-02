@@ -1,0 +1,59 @@
+@use "../abstracts" as *;
+
+.list-container {
+  position: relative;
+  z-index: 10;
+  .content-container{
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 500px;
+    max-height: 500px;
+    .List-header {
+      text-align: center;
+      background-color: $Deep-Teal-Sea-3;
+      padding: 15px;
+      font-size: 1.4rem;
+    }
+    .ordered-list{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 10px;
+      background-color: $Deep-Teal-Sea-4;
+      min-height: 30px;
+      padding: 10px;
+      overflow: scroll;
+      li{
+        list-style: none;
+        color: $Deep-Teal-Sea-1;
+        padding: 5px;
+        border-left: 2px solid var(--accent-color-2);
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+.create-note-button{
+  background-color: var(--accent-color-2)
+}
+.horizontal-align{
+  @include centerFlex();
+  gap: 5px;
+  .create-note-button{
+    border-radius: 15px 0px 0px 15px;
+  }
+  .see-notes-button{
+    border-radius:0 15px 15px  0;
+  }
+}
+.button-container.false{
+  @include centerFlex(column);
+  align-items: stretch;
+  gap: 5px;
+  .create-note-button{
+    border-radius: 15px 15px 0 0;
+  }
+  .see-notes-button{
+    border-radius: 0 0 15px 15px;
+  }
+}

@@ -37,6 +37,7 @@ export class TaskMemoryService implements TaskMemoryTypes {
       startDate: undefined,
       endDate: undefined,
       objetiveId: crypto.randomUUID(),
+      notes: [],
     };
     return this.add(newData);
   }

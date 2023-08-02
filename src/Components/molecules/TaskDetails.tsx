@@ -1,10 +1,19 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { TaskStatus } from '../../models';
+import EditButton from '../atoms/EditButton';
 import Button, { Sizes } from '../atoms/Button';
 import { TaskContext } from '../../Contexts/TaskContext';
+import Modal from '../atoms/Modal';
+import BaseForm from './BaseForm';
+import NotesButtons from './NotesButtons';
+import { renderTextWithLineBreaks } from '../../utils/utils';
 
 function TaskDetails() {
-  const { taskToRender, updateTask } = useContext(TaskContext);
+  const {
+    taskToRender, updateTask,
+  } = useContext(TaskContext);
+  const [editModalOpen, setEditModalOpen] = React.useState(false);
+
   if (taskToRender === undefined) {
     return (
       <p>Select a Task to see </p>
@@ -17,8 +26,8 @@ function TaskDetails() {
   let secondButtonText: string;
   let newStatusFirstButton:TaskStatus;
   let newStatusSecondButton:TaskStatus;
-  let startDateString = taskToRender.startDate ? timeFormat.format(taskToRender?.startDate) : ' Not started yet';
-  let endDateString = taskToRender.endDate ? timeFormat.format(taskToRender?.endDate) : ' Not finished yet';
+  let startDateString = taskToRender.startDate ? timeFormat.format(taskToRender.startDate) : ' Not started yet';
+  let endDateString = taskToRender.endDate ? timeFormat.format(taskToRender.endDate) : ' Not finished yet';
 
   if (status === TaskStatus.ToDo) {
     firstButtonText = 'Start';
@@ -53,10 +62,25 @@ function TaskDetails() {
 
     updateTask(id, { status: newStatusSecondButton });
   };
-
+  const editButtonHandler = () => setEditModalOpen(true);
+  const notesLength = () => {
+    if (taskToRender && taskToRender.notes) {
+      const anyNote = taskToRender.notes.length >= 1;
+      return anyNote;
+    }
+    return false;
+  };
   const statusActions = () => {
-    if (status === TaskStatus.Completed) { return (<p className="status-note">Notas de La tarea completada</p>); }
-    if (status === TaskStatus.Canceled) { return (<p className="status-note">Notas de La tarea cancelada</p>); }
+    if (status === TaskStatus.Completed) {
+      return (
+        <NotesButtons isHorizontal={false} seeButton={notesLength()} createButton />
+      );
+    }
+    if (status === TaskStatus.Canceled) {
+      return (
+        <NotesButtons isHorizontal={false} seeButton={notesLength()} createButton />
+      );
+    }
 
     return (
       <>
@@ -64,26 +88,39 @@ function TaskDetails() {
           size={Sizes.Small}
           action={firstTaskAction}
           content={firstButtonText}
-          customClass={`button--${newStatusFirstButton}`}
+          customClass={`button--${newStatusFirstButton} upper-button`}
         />
         <Button
           size={Sizes.Small}
           action={secondTaskAction}
           content={secondButtonText}
-          customClass={`button--${newStatusSecondButton}`}
+          customClass={`button--${newStatusSecondButton} down-button`}
         />
       </>
     );
   };
   return (
     <div className="current-task">
-      <h3 className="task-detail__title">{taskToRender.title}</h3>
+      <h3 className="task-detail__title">
+        {taskToRender.title}
+        <EditButton action={editButtonHandler} />
+        {editModalOpen && (
+        <Modal toClose={setEditModalOpen}>
+          <BaseForm isEdit toClose={setEditModalOpen} />
+        </Modal>
+        )}
+      </h3>
       <div className="task-status">
         <div className="task-info">
           <p className={`task-importance task-importance--${taskToRender.importance}`}>{taskToRender.importance}</p>
           <div className="info-dates">
             <p className={`info__date info__date--start ${!startDateString.toLocaleLowerCase().includes('not')}`}>{startDateString}</p>
-            <p className={`info__date info__date--end ${!endDateString.toLocaleLowerCase().includes('not')}`}>{endDateString}</p>
+            {taskToRender.endDate || status === TaskStatus.Canceled
+              ? (<p className={`info__date info__date--end ${!endDateString.toLocaleLowerCase().includes('not')}`}>{endDateString}</p>)
+              : (
+                <NotesButtons isHorizontal createButton seeButton={notesLength()} />
+              )}
+
           </div>
         </div>
         <div className="status-control">
@@ -93,7 +130,7 @@ function TaskDetails() {
           </div>
         </div>
       </div>
-      <p className="description">{taskToRender.description}</p>
+      <p className="description">{renderTextWithLineBreaks(taskToRender.description)}</p>
     </div>
   );
 }

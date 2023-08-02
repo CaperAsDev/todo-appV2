@@ -1,16 +1,23 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { TaskImportance } from '../../models';
 import Button, { Sizes } from '../atoms/Button';
-import CloseButton from '../atoms/closeButton';
+import CloseButton from '../atoms/CloseButton';
 import { TaskContext } from '../../Contexts/TaskContext';
 
-export default function BaseForm() {
-  const { addTask, setOpenModal } = useContext(TaskContext);
+type BaseFormProps = {
+  isEdit: boolean
+  toClose: React.Dispatch<React.SetStateAction<boolean>>
+};
+export default function BaseForm({ isEdit, toClose }:BaseFormProps) {
+  const {
+    addTask, taskToRender, updateTask, setIdSelected,
+
+  } = useContext(TaskContext);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [importance, setImportance] = useState(TaskImportance.Important);
-
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.value.length === 1) {
@@ -36,14 +43,28 @@ export default function BaseForm() {
   const handleSubmit = () => {
     const areFieldsValid = title.trim() !== '' && description.trim() !== '';
     if (areFieldsValid) {
-      addTask({ title, description, importance });
-      setOpenModal(false);
+      if (isEdit && taskToRender) {
+        updateTask(taskToRender.id, { title, description, importance });
+        toClose(false);
+      } else {
+        const data = addTask({ title, description, importance });
+        setIdSelected(data.id);
+        toClose(false);
+      }
     }
   };
+  useEffect(() => {
+    if (isEdit && taskToRender) {
+      setTitle(taskToRender.title);
+      setDescription(taskToRender.description);
+      setImportance(taskToRender.importance);
+    }
+  }, []);
+
   return (
     <div className="form-container">
       <form className="form">
-        <h3 className="form-header">Create a new Task</h3>
+        <h3 className="form-header">{isEdit ? 'Edit Task' : 'Create a new Task'}</h3>
         <div className="form-inputs">
           <div className="title">
             <label htmlFor="title">Title:</label>
@@ -75,9 +96,14 @@ export default function BaseForm() {
             />
           </div>
         </div>
-        <Button size={Sizes.Medium} action={handleSubmit} content="Create Task" customClass="create-task-button" />
+        <Button
+          size={Sizes.Medium}
+          action={handleSubmit}
+          content={isEdit ? 'Save changes' : 'Create Task'}
+          customClass="action-button"
+        />
       </form>
-      <CloseButton action={() => setOpenModal(false)} />
+      <CloseButton action={() => toClose(false)} />
     </div>
   );
 }

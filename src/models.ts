@@ -26,6 +26,7 @@ export interface Task extends Base {
   importance: TaskImportance;
   seasons?: [{ from: Date, until: Date }];
   timeEstimated?: number;
+  notes: string[];
   // No deberia ser un numero sino un enum con diferentes opciones asi como el de importancia.
   objetiveId : Objetive['id'];
 }
@@ -43,4 +44,21 @@ interface Category extends Base {
 }
 /* DTOs */
 export interface CreateTaskDTO extends Pick<Task, 'title' | 'description' | 'importance'> {}
-export interface UpdateTask extends Partial<CreateTaskDTO> {}
+export interface UpdateTask extends Partial<Omit<Task, 'id'>> {}
+
+/* Context */
+export type TaskContextProps = {
+  error: boolean
+  loading: boolean
+  empty: boolean
+  setSearchValue:React.Dispatch<React.SetStateAction<string>>
+  searchValue:string
+  tasks:Task[]
+  searchedTodo: Task[]
+  noCoincidence: boolean
+  addTask: (newTask: CreateTaskDTO) => Task
+  updateTask: (id: `${string}-${string}-${string}-${string}-${string}`, changes: UpdateTask) => Task | undefined
+  idSelected: string
+  taskToRender: Task | undefined
+  setIdSelected: React.Dispatch<React.SetStateAction<`${string}-${string}-${string}-${string}-${string}`>>
+};
