@@ -9,7 +9,7 @@ function Menu() {
 
   return (
     <div className="sideMenu">
-      <div className="menu-container">
+      <div role='menu' className="menu-container">
         <div className="items-container">
           <MenuItems itemType={DataType.Category} />
           <MenuItems itemType={DataType.Goal} />

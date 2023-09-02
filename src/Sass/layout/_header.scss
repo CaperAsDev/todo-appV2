@@ -2,6 +2,7 @@
 header{
   @include centerFlex;
   height: 60px;
+  width: 100%;
   justify-content: space-between;
   background-color: $Deep-Teal-Sea-2;
   H1{

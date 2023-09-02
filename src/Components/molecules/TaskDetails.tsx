@@ -100,7 +100,7 @@ function TaskDetails() {
     );
   };
   return (
-    <div className="current-task">
+    <article className="current-task">
       <h3 className="task-detail__title">
         {taskToRender.title}
         <EditButton action={editButtonHandler} />
@@ -131,7 +131,7 @@ function TaskDetails() {
         </div>
       </div>
       <p className="description">{renderTextWithLineBreaks(taskToRender.description)}</p>
-    </div>
+    </article>
   );
 }
 

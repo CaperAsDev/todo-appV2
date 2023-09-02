@@ -1,6 +1,5 @@
 .tasks-list{
-  height: 425px;
-  overflow: scroll;
+  max-height: 425px;
   display: flex;
   flex-direction: column;
   gap: 5px;

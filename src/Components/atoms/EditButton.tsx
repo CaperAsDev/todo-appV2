@@ -3,6 +3,6 @@ import { BsPencilSquare } from 'react-icons/bs';
 
 export default function EditButton({ action }: { action:() => void }) {
   return (
-    <button type="button" className="edithButton" onClick={action}><BsPencilSquare /></button>
+    <button type="button" className="editButton" onClick={action}><BsPencilSquare /></button>
   );
 }

@@ -19,7 +19,7 @@ function Reloj() {
   }, []);
 
   return (
-    <div className="clock-container">
+    <div role='timer' className="clock-container">
       <p className="clock">{hora}</p>
     </div>
   );

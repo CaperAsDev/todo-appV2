@@ -10,7 +10,7 @@ type MenuItemProps = {
 
 function MenuItems({ itemType } : MenuItemProps) {
   return (
-    <div className="item-container">
+    <div role="menuitem" className="item-container">
       <p className="menu__item">
         {itemType}
       </p>

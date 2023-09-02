@@ -10,7 +10,7 @@ export default function TaskManager() {
   } = React.useContext(TaskContext);
 
   return (
-    <div className="interface">
+    <section className="interface">
       <HeaderMessage />
       {
         !noCoincidence
@@ -21,6 +21,6 @@ export default function TaskManager() {
           </div>
         )
       }
-    </div>
+    </section>
   );
 }

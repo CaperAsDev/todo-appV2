@@ -89,10 +89,8 @@
     margin: 30px 0px 10px 10px;
     padding:0px 10px 0 5px;
     border-left: 1px solid var(--accent-color-3);
-    text-align: justify;
     color: $Deep-Teal-Sea-5;
-    text-align: justify;
-    max-height: 120px;
-    overflow: scroll;
+    max-height: 220px;
+    word-wrap: normal;
   }
 }

@@ -12,9 +12,16 @@ export default function TodoSearch({ setSearchValue, searchValue }: TodoSearchPr
     setSearchValue(value);
   };
   return (
-    <div className="search-box">
+    <label className="search-box">
       <BsSearch />
-      <input type="text" placeholder="Jugar un Aram" onChange={inputHandler} value={searchValue} />
-    </div>
+      <input
+      role='searchbox'
+      type="text"
+      placeholder="Organize files in Downloads"
+      onChange={inputHandler} value={searchValue} 
+      onFocus={(event) => event.target.parentElement?.classList.add('focused')}
+      onBlur={(event) => event.target.parentElement?.classList.remove('focused')}
+      />
+    </label>
   );
 }

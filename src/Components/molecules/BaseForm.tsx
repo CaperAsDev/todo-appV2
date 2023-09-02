@@ -74,6 +74,7 @@ export default function BaseForm({ isEdit, toClose }:BaseFormProps) {
               placeholder="Ver Capitulos del dia"
               onChange={handleTitleChange}
               value={title}
+              autoFocus
             />
           </div>
           <div className="importance">

@@ -1,6 +1,35 @@
-@mixin centerFlex($direction: row){
+@mixin centerFlex($direction: row) {
   display: flex;
   flex-direction: $direction;
   align-items: center;
   justify-content: center;
+}
+
+$layout-breakpoint-extra-small: 599px;
+$layout-breakpoint-small: 768px;
+$layout-breakpoint-medium: 992px;
+$layout-breakpoint-large: 1200px;
+
+@mixin xs {
+  @media only screen and (max-width: $layout-breakpoint-extra-small) {
+    @content
+  }
+}
+
+@mixin s {
+  @media only screen and (max-width: $layout-breakpoint-small) {
+    @content
+  }
+}
+
+@mixin m {
+  @media only screen and (max-width: $layout-breakpoint-medium) {
+    @content
+  }
+}
+
+@mixin l {
+  @media only screen and (max-width: $layout-breakpoint-large) {
+    @content
+  }
 }

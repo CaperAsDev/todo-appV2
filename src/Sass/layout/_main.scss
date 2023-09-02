@@ -1,11 +1,11 @@
 @use "../abstracts" as *;
 
-main{
+main {
   @include centerFlex;
   box-sizing: border-box;
-  width: 100%;
+  width: 1400px;
   height: calc(100vh - 100px);
-  overflow: scroll;
+  overflow: hidden;
   position: relative;
   justify-content: space-between;
   align-items: flex-start;
