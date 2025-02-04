@@ -1,15 +1,19 @@
-@use "../abstracts" as *;
+@use "../../abstracts" as *;
+
 .item-container {
   scroll-snap-align: start;
   background-color: transparent;
   cursor: pointer;
-  &:hover .todo-item{
+
+  &:hover .todo-item {
     transform: scale(1.05);
     transform: translateX(20px);
   }
-  &:focus .todo-item{
+
+  &:focus .todo-item {
     box-shadow: 0px 0px 5px 0px $Deep-Teal-Sea-5;
   }
+
   .todo-item {
     @include centerFlex;
     justify-content: space-between;
@@ -20,35 +24,44 @@
     padding-left: 10px;
     min-width: 120px;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
     span {
       padding: 15px 0;
     }
+
     .item__status {
       display: flex;
       align-items: center;
       padding: 2px;
       align-self: stretch;
       width: 16px;
+
       &--Completed {
         background-color: var(--status-Completed);
       }
+
       &--InProgress {
         background-color: var(--status-InProgress);
       }
+
       &--ToDo {
         background-color: var(--status-ToDo);
       }
+
       &--Canceled {
         background-color: var(--status-Canceled);
       }
+
       &--Paused {
         background-color: var(--status-Paused);
       }
+
       & * {
         color: var(--scheme-500);
       }
     }
   }
+
   .item--selected {
     transform: translateX(20px);
   }

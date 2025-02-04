@@ -1,14 +1,14 @@
-@use "../abstracts" as *;
+@use "../../abstracts" as *;
 
 .button {
   cursor: pointer;
+  border-radius: 10px;
 
   & .button-text {
     font-weight: bold;
   }
 
   &--small {
-    border-radius: 10px;
     padding: 4px;
 
     &:hover,
@@ -19,8 +19,7 @@
   }
 
   &--medium {
-    border-radius: 10px;
-    font-size: 1.2rem;
+    font-size: var(--fs-xl);
   }
 
   &--Completed {
@@ -76,7 +75,8 @@
   box-shadow: 0px 0px 1px 7px $Deep-Teal-Sea-3;
   background-color: transparent;
   border-radius: 50%;
-  &:focus{
+
+  &:focus {
     box-shadow: 0px 0px 3px 5px $Deep-Teal-Sea-5;
   }
 

@@ -9,7 +9,9 @@ I recommend learning React after knowing:
 Once you feel confident about your knowleadge in those topics, you can start learning React.
 
 > I personally study duting 1 year html, css and Javascript before starting with React.
-#### 📚 Resources
+
+** 📚 Resources **
+
 I'm using **Vite** to set the development enviroment of the project, to start a porject with *Vite* :
 1. Run in the command line: ``npm create vite@latest`` and follow the instructions.
 
@@ -19,7 +21,7 @@ Of course I recommend having the documentation open in a browser to search for a
 - [TypeScript](https://www.typescriptlang.org/docs/handbook/2/basic-types.html)
 - [Sass](https://sass-lang.com/documentation/)
 
-#### 🤓 Learning process
+## 🤓 Learning process
 I'll be pointing some topics with their respective link to the documentation, so be sure you head to them when you don't understand the code written.
 
 ## 😵‍💫 Let's start

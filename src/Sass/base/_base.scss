@@ -5,22 +5,11 @@ html {
   color: abstracts.$Deep-Teal-Sea-5;
 }
 
-body {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
 button {
   background-color: var(--accent-color-1);
   outline: transparent;
   border: none;
   color: abstracts.$Deep-Teal-Sea-1;
-  padding: 0;
-}
-
-p {
-  margin: 0;
   padding: 0;
 }
 
@@ -30,8 +19,25 @@ p {
   height: 100%;
 }
 
-/* *{
-  :focus{
-    box-shadow: 0px 0px 5px 0px abstracts.$Deep-Teal-Sea-5;
-  }
-} */
+p,
+button,
+span {
+  font-size: var(--fs-s);
+}
+
+h1 {
+  font-size: var(--fs-xl);
+}
+
+h2 {
+  font-size: var(--fs-l);
+}
+
+h3 {
+  font-size: var(--fs-m);
+}
+
+svg {
+  width: var(--fs-s);
+  height: var(--fs-s);
+}

@@ -1,47 +1,47 @@
-import React, { useContext } from 'react';
-import { TaskStatus } from '../../models';
-import EditButton from '../atoms/EditButton';
-import Button, { Sizes } from '../atoms/Button';
-import { TaskContext } from '../../Contexts/TaskContext';
-import Modal from '../atoms/Modal';
-import BaseForm from './BaseForm';
-import NotesButtons from './NotesButtons';
-import { renderTextWithLineBreaks } from '../../utils/utils';
+import { useContext, useState } from "react";
+import { TaskStatus } from "../../models";
+import EditButton from "../atoms/EditButton";
+import Button, { Sizes } from "../atoms/Button";
+import { TaskContext } from "../../Contexts/TaskContext";
+import Modal from "../atoms/Modal";
+import BaseForm from "./BaseForm";
+import NotesButtons from "./NotesButtons";
+import { renderTextWithLineBreaks } from "../../utils/utils";
 
 function TaskDetails() {
-  const {
-    taskToRender, updateTask,
-  } = useContext(TaskContext);
-  const [editModalOpen, setEditModalOpen] = React.useState(false);
+  const { taskToRender, updateTask } = useContext(TaskContext);
+  const [editModalOpen, setEditModalOpen] = useState(false);
 
   if (taskToRender === undefined) {
-    return (
-      <p>Select a Task to see </p>
-    );
+    return <p>Select a Task to see </p>;
   }
   const { id, status } = taskToRender;
-  const timeFormat = new Intl.DateTimeFormat('es', { dateStyle: 'long' });
+  const timeFormat = new Intl.DateTimeFormat("es", { dateStyle: "long" });
 
   let firstButtonText: string;
   let secondButtonText: string;
-  let newStatusFirstButton:TaskStatus;
-  let newStatusSecondButton:TaskStatus;
-  let startDateString = taskToRender.startDate ? timeFormat.format(taskToRender.startDate) : ' Not started yet';
-  let endDateString = taskToRender.endDate ? timeFormat.format(taskToRender.endDate) : ' Not finished yet';
+  let newStatusFirstButton: TaskStatus;
+  let newStatusSecondButton: TaskStatus;
+  let startDateString = taskToRender.startDate
+    ? timeFormat.format(taskToRender.startDate)
+    : " Not started yet";
+  let endDateString = taskToRender.endDate
+    ? timeFormat.format(taskToRender.endDate)
+    : " Not finished yet";
 
   if (status === TaskStatus.ToDo) {
-    firstButtonText = 'Start';
-    secondButtonText = 'Cancel';
+    firstButtonText = "Start";
+    secondButtonText = "Cancel";
     newStatusFirstButton = TaskStatus.InProgress;
     newStatusSecondButton = TaskStatus.Canceled;
   } else if (status === TaskStatus.InProgress) {
-    firstButtonText = 'Pause';
-    secondButtonText = 'Complete';
+    firstButtonText = "Pause";
+    secondButtonText = "Complete";
     newStatusFirstButton = TaskStatus.Paused;
     newStatusSecondButton = TaskStatus.Completed;
   } else if (status === TaskStatus.Paused) {
-    firstButtonText = 'Continue';
-    secondButtonText = 'Cancel';
+    firstButtonText = "Continue";
+    secondButtonText = "Cancel";
     newStatusFirstButton = TaskStatus.InProgress;
     newStatusSecondButton = TaskStatus.Canceled;
   }
@@ -73,12 +73,20 @@ function TaskDetails() {
   const statusActions = () => {
     if (status === TaskStatus.Completed) {
       return (
-        <NotesButtons isHorizontal={false} seeButton={notesLength()} createButton />
+        <NotesButtons
+          isHorizontal={false}
+          seeButton={notesLength()}
+          createButton
+        />
       );
     }
     if (status === TaskStatus.Canceled) {
       return (
-        <NotesButtons isHorizontal={false} seeButton={notesLength()} createButton />
+        <NotesButtons
+          isHorizontal={false}
+          seeButton={notesLength()}
+          createButton
+        />
       );
     }
 
@@ -105,32 +113,53 @@ function TaskDetails() {
         {taskToRender.title}
         <EditButton action={editButtonHandler} />
         {editModalOpen && (
-        <Modal toClose={setEditModalOpen}>
-          <BaseForm isEdit toClose={setEditModalOpen} />
-        </Modal>
+          <Modal toClose={setEditModalOpen}>
+            <BaseForm isEdit toClose={setEditModalOpen} />
+          </Modal>
         )}
       </h3>
       <div className="task-status">
         <div className="task-info">
-          <p className={`task-importance task-importance--${taskToRender.importance}`}>{taskToRender.importance}</p>
+          <p
+            className={`task-importance task-importance--${taskToRender.importance}`}
+          >
+            {taskToRender.importance}
+          </p>
           <div className="info-dates">
-            <p className={`info__date info__date--start ${!startDateString.toLocaleLowerCase().includes('not')}`}>{startDateString}</p>
-            {taskToRender.endDate || status === TaskStatus.Canceled
-              ? (<p className={`info__date info__date--end ${!endDateString.toLocaleLowerCase().includes('not')}`}>{endDateString}</p>)
-              : (
-                <NotesButtons isHorizontal createButton seeButton={notesLength()} />
-              )}
-
+            <p
+              className={`info__date info__date--start ${!startDateString
+                .toLocaleLowerCase()
+                .includes("not")}`}
+            >
+              {startDateString}
+            </p>
+            {taskToRender.endDate || status === TaskStatus.Canceled ? (
+              <p
+                className={`info__date info__date--end ${!endDateString
+                  .toLocaleLowerCase()
+                  .includes("not")}`}
+              >
+                {endDateString}
+              </p>
+            ) : (
+              <NotesButtons
+                isHorizontal
+                createButton
+                seeButton={notesLength()}
+              />
+            )}
           </div>
         </div>
         <div className="status-control">
-          <p className={`status__title status__title--${taskToRender.status}`}>{taskToRender.status}</p>
-          <div className="status__actions">
-            {statusActions()}
-          </div>
+          <p className={`status__title status__title--${taskToRender.status}`}>
+            {taskToRender.status}
+          </p>
+          <div className="status__actions">{statusActions()}</div>
         </div>
       </div>
-      <p className="description">{renderTextWithLineBreaks(taskToRender.description)}</p>
+      <p className="description">
+        {renderTextWithLineBreaks(taskToRender.description)}
+      </p>
     </article>
   );
 }

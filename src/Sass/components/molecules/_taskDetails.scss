@@ -1,10 +1,11 @@
-@use "../abstracts" as *;
+@use "../../abstracts" as *;
 
 .current-task {
   border-radius: 0 20px 20px 0;
   background-color: var(--scheme-500);
   color: var(--light-color);
   height: fit-content;
+
   .task-detail__title {
     position: relative;
     font-size: 1.3rem;
@@ -13,81 +14,101 @@
     border-bottom: 2px solid var(--light-color);
     text-align: center;
   }
+
   .task-status {
     margin-top: 20px;
     display: flex;
     justify-content: space-around;
     font-weight: 600;
+
     .task-info {
       @include centerFlex(column);
       justify-content: space-between;
+
       .task-importance {
         text-align: center;
         padding-bottom: 2px;
         font-size: 1.2rem;
         color: var(--accent-color-2);
       }
+
       .info-dates {
         @include centerFlex(column);
         margin-top: 15px;
         gap: 10px;
+
         .info__date {
           font-weight: lighter;
+
           &--start {
             color: var(--accent-color-3);
           }
+
           &--end {
             color: var(--accent-color-1);
           }
         }
       }
     }
+
     .status-control {
       @include centerFlex(column);
       justify-content: space-between;
+
       .status__title {
         font-size: 1.2rem;
         color: var(--accent-color-2);
-        &--Canceled{
+
+        &--Canceled {
           color: var(--status-Canceled)
         }
-        &--Completed{
+
+        &--Completed {
           color: var(--status-Completed)
         }
-        &--ToDo{
+
+        &--ToDo {
           color: var(--status-ToDo)
         }
-        &--Paused{
+
+        &--Paused {
           color: var(--status-Paused)
         }
-        &--InProgress{
+
+        &--InProgress {
           color: var(--status-InProgress)
         }
       }
+
       .status__actions {
         @include centerFlex(column);
         margin-top: 15px;
         align-items: stretch;
         gap: 5px;
+
         .status-note {
           font-weight: lighter;
           color: $Deep-Teal-Sea-5;
         }
+
         .button--small {
           padding: 5px 10px;
         }
+
         .upper-button {
           border-radius: 0;
         }
+
         .down-button {
           border-radius: 0 0 10px 10px;
         }
       }
     }
   }
+
   .description {
     margin: 30px 0px 10px 10px;
-    padding:0px 10px 0 5px;
+    padding: 0px 10px 0 5px;
     border-left: 1px solid var(--accent-color-3);
     color: $Deep-Teal-Sea-5;
     max-height: 220px;

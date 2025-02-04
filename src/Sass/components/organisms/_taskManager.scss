@@ -1,15 +1,17 @@
-@use "../abstracts" as *;
+@use "../../abstracts" as *;
 
-.interface{
+.interface {
   background-color: $Deep-Teal-Sea-3;
   padding: 10px;
   border-radius: 10px;
   width: 700px;
   margin: 10px 0;
-  .counter{
+
+  .counter {
     margin: 10px 0;
   }
-  .tasks{
+
+  .tasks {
     display: grid;
     margin-bottom: 10px;
     grid-template-columns: auto 1fr;

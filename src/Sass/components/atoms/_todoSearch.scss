@@ -1,4 +1,4 @@
-@use "../abstracts" as *;
+@use "../../abstracts" as *;
 
 .search-box {
   @include centerFlex();
@@ -6,14 +6,17 @@
   width: fit-content;
   padding: 10px;
   border-radius: 20px;
-  &:hover, &.focused {
+
+  &:hover,
+  &.focused {
     box-shadow: 0px 0px 2px 1px var(--accent-color-2);
   }
-  
-  svg{
+
+  svg {
     color: var(--accent-color-2);
     font-size: 1.2rem;
   }
+
   input {
     background-color: transparent;
     outline: none;
@@ -21,6 +24,7 @@
     width: 250px;
     margin-left: 5px;
     color: var(--dark-color);
+
     &::placeholder {
       color: $Deep-Teal-Sea-3;
     }

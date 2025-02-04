@@ -1,21 +1,28 @@
 /* eslint-disable react/require-default-props */
 export enum Sizes {
-  Small = 'small',
-  Medium = 'medium',
-  Big = 'big',
+  Small = "small",
+  Medium = "medium",
+  Big = "big",
 }
 type ButtonProps = {
-  size:Sizes
-  content: string
-  action: () => void
-  customClass?: string
+  size: Sizes;
+  content: string;
+  action: () => void;
+  customClass?: string;
 };
 export default function Button({
-  size, content, action, customClass = '',
+  size,
+  content,
+  action,
+  customClass = "",
 }: ButtonProps) {
   return (
-    <button onClick={action} type="button" className={`button button--${size} ${customClass}`}>
-      <p className="button-text">{content}</p>
+    <button
+      onClick={action}
+      type="button"
+      className={`button button--${size} ${customClass}`}
+    >
+      <span className="button-text">{content}</span>
     </button>
   );
 }

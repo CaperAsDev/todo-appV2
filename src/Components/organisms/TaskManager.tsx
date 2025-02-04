@@ -1,4 +1,4 @@
-import React from 'react';
+import { useContext } from 'react';
 import { TaskContext } from '../../Contexts/TaskContext';
 import TaskDetails from '../molecules/TaskDetails';
 import TodoList from '../molecules/TodoList';
@@ -7,7 +7,7 @@ import HeaderMessage from '../atoms/HeaderMessage';
 export default function TaskManager() {
   const {
     noCoincidence,
-  } = React.useContext(TaskContext);
+  } = useContext(TaskContext);
 
   return (
     <section className="interface">
